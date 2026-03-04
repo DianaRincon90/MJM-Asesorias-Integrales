@@ -7,8 +7,8 @@ export const Logo: React.FC<{ className?: string }> = ({ className }) => {
             <Image
                 src="/logo.png"
                 alt="MJM Logo"
-                width={120}
-                height={120}
+                width={80}
+                height={80}
                 style={{ objectFit: 'contain' }}
             />
         </div>

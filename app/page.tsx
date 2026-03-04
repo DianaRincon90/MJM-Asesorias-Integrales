@@ -247,8 +247,8 @@ export default function Home() {
                                 style={{ padding: '20px', backgroundColor: 'white', borderRadius: '12px', display: 'inline-block' }}
                             >
                                 <Image
-                                    src="/brands/ctc.jpg" // Keeping as placeholder but making it a link to the form
-                                    alt="QR Code"
+                                    src="/brands/qr-service.jpg"
+                                    alt="QR Code Solicitud de Servicios"
                                     width={150}
                                     height={150}
                                 />
