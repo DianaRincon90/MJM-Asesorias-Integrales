@@ -87,24 +87,42 @@ export default function Home() {
 
             {/* About Section */}
             <section id="nosotros" style={{ backgroundColor: 'var(--mjm-blue)', color: 'white' }}>
-                <div className="section-container" style={{ display: 'flex', alignItems: 'center', gap: '60px', flexWrap: 'wrap' }}>
-                    <div style={{ flex: '1 1 400px' }}>
-                        <h2 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>Sobre Nosotros</h2>
-                        <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '20px', opacity: 0.9 }}>
-                            En Asesorías Integrales MJM, somos su aliado estratégico en calidad y precisión. Con años de experiencia, brindamos soluciones integrales que optimizan los procesos de medición de nuestros clientes.
-                        </p>
-                        <ul style={{ listStyle: 'none', opacity: 0.9 }}>
-                            <li style={{ marginBottom: '10px' }}>✓ Certificación ISO 9001</li>
-                            <li style={{ marginBottom: '10px' }}>✓ Innovación Continua</li>
-                            <li style={{ marginBottom: '10px' }}>✓ Personal Altamente Calificado</li>
-                        </ul>
+                <div className="section-container">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '60px', flexWrap: 'wrap', marginBottom: '60px' }}>
+                        <div style={{ flex: '1 1 400px' }}>
+                            <h2 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>Sobre Nosotros</h2>
+                            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '20px', opacity: 0.9 }}>
+                                En Asesorías Integrales MJM, somos su aliado estratégico en calidad y precisión. Con años de experiencia, brindamos soluciones integrales que optimizan los procesos de medición de nuestros clientes.
+                            </p>
+                            <ul style={{ listStyle: 'none', opacity: 0.9 }}>
+                                <li style={{ marginBottom: '10px' }}>✓ Certificación ISO 9001</li>
+                                <li style={{ marginBottom: '10px' }}>✓ Innovación Continua</li>
+                                <li style={{ marginBottom: '10px' }}>✓ Personal Altamente Calificado</li>
+                            </ul>
+                        </div>
+                        <div style={{ flex: '1 1 400px', height: '400px', borderRadius: '16px', overflow: 'hidden', position: 'relative' }}>
+                            <Image
+                                src="/about/team-cimga.jpg"
+                                alt="MJM Team at CIMGA"
+                                fill
+                                style={{ objectFit: 'cover' }}
+                            />
+                        </div>
                     </div>
-                    <div style={{ flex: '1 1 400px', height: '400px', borderRadius: '16px', overflow: 'hidden' }}>
-                        <img
-                            src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80"
-                            alt="MJM Team"
-                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        />
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+                        <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '12px', color: 'black' }}>
+                            <div style={{ position: 'relative', height: '200px', marginBottom: '20px' }}>
+                                <Image src="/about/mission.png" alt="Misión Visión" fill style={{ objectFit: 'contain' }} />
+                            </div>
+                            <h3 style={{ textAlign: 'center', color: 'var(--mjm-blue)' }}>Nuestra Filosofía</h3>
+                        </div>
+                        <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '12px', color: 'black' }}>
+                            <div style={{ position: 'relative', height: '200px', marginBottom: '20px' }}>
+                                <Image src="/about/certification.jpg" alt="Certificación" fill style={{ objectFit: 'contain' }} />
+                            </div>
+                            <h3 style={{ textAlign: 'center', color: 'var(--mjm-blue)' }}>Calidad Certificada</h3>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -118,7 +136,7 @@ export default function Home() {
                     justifyContent: 'center',
                     alignItems: 'center',
                     gap: '40px',
-                    opacity: 0.8
+                    opacity: 1
                 }}>
                     {[
                         { name: 'UNI-T', src: '/brands/uni-t.jpg' },
@@ -130,12 +148,12 @@ export default function Home() {
                         { name: 'Easy-Laser', src: '/brands/easylaser.png' }
                     ].map((brand) => (
                         <div key={brand.name} style={{
-                            width: '150px',
-                            height: '80px',
+                            width: '160px',
+                            height: '90px',
                             position: 'relative',
-                            filter: 'grayscale(100%) brightness(0.8)',
+                            filter: 'grayscale(100%)',
                             transition: 'filter 0.3s'
-                        }} onMouseOver={(e) => e.currentTarget.style.filter = 'none'} onMouseOut={(e) => e.currentTarget.style.filter = 'grayscale(100%) brightness(0.8)'}>
+                        }} onMouseOver={(e) => e.currentTarget.style.filter = 'none'} onMouseOut={(e) => e.currentTarget.style.filter = 'grayscale(100%)'}>
                             <Image
                                 src={brand.src}
                                 alt={brand.name}

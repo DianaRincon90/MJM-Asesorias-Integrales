@@ -5,10 +5,10 @@ export const Logo: React.FC<{ className?: string }> = ({ className }) => {
     return (
         <div className={`logo-container ${className}`} style={{ display: 'flex', alignItems: 'center' }}>
             <Image
-                src="/logo.png"
+                src="/logo-official.png"
                 alt="MJM Logo"
-                width={80}
-                height={80}
+                width={120}
+                height={120}
                 style={{ objectFit: 'contain' }}
             />
         </div>
