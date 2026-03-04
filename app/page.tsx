@@ -1,3 +1,5 @@
+'use client';
+
 import { Shield, BookOpen, Settings, Package, ArrowRight, Mail, Phone, MessageSquare, MapPin, Clock } from 'lucide-react'
 import Image from 'next/image'
 
