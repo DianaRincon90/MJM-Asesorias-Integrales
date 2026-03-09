@@ -32,6 +32,9 @@ export default function AdminDashboard() {
         servicio_4_title: '',
         servicio_4_desc: '',
         servicio_4_image: '',
+        servicio_5_title: '',
+        servicio_5_desc: '',
+        servicio_5_image: '',
         contacto_email_1: '',
         contacto_email_2: '',
         contacto_phone_1: '',
@@ -315,15 +318,15 @@ export default function AdminDashboard() {
 
                                     <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', marginTop: '30px' }}>
                                         <h3 style={{ marginBottom: '20px', color: 'var(--mjm-blue)' }}>Tarjetas de Servicios</h3>
-                                        <p style={{ opacity: 0.7, marginBottom: '20px' }}>A continuación puedes configurar cada uno de los 4 servicios principales mostrados en tarjetas.</p>
+                                        <p style={{ opacity: 0.7, marginBottom: '20px' }}>A continuación puedes configurar cada uno de los 5 servicios principales mostrados en tarjetas.</p>
 
-                                        {[1, 2, 3, 4].map((num) => {
+                                        {[1, 2, 3, 4, 5].map((num) => {
                                             const titleKey = `servicio_${num}_title` as keyof typeof content;
                                             const descKey = `servicio_${num}_desc` as keyof typeof content;
                                             const imageKey = `servicio_${num}_image` as keyof typeof content;
 
                                             return (
-                                                <div key={num} style={{ borderBottom: num < 4 ? '1px solid #e2e8f0' : 'none', paddingBottom: '30px', marginBottom: '30px' }}>
+                                                <div key={num} style={{ borderBottom: num < 5 ? '1px solid #e2e8f0' : 'none', paddingBottom: '30px', marginBottom: '30px' }}>
                                                     <h4 style={{ color: 'var(--mjm-orange)', marginBottom: '15px' }}>Servicio #{num}</h4>
 
                                                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>

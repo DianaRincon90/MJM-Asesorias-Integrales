@@ -17,7 +17,8 @@ export default function ServiciosPage() {
                 'servicio_1_title', 'servicio_1_desc', 'servicio_1_image',
                 'servicio_2_title', 'servicio_2_desc', 'servicio_2_image',
                 'servicio_3_title', 'servicio_3_desc', 'servicio_3_image',
-                'servicio_4_title', 'servicio_4_desc', 'servicio_4_image'
+                'servicio_4_title', 'servicio_4_desc', 'servicio_4_image',
+                'servicio_5_title', 'servicio_5_desc', 'servicio_5_image'
             ]
             const { data } = await supabase.from('site_settings').select('id, value').in('id', keys)
             if (data) {
@@ -26,7 +27,7 @@ export default function ServiciosPage() {
                 if (titleData?.value) setTitle(titleData.value)
                 if (subtitleData?.value) setSubtitle(subtitleData.value)
 
-                const dynamicServices = [1, 2, 3, 4].map(num => ({
+                const dynamicServices = [1, 2, 3, 4, 5].map(num => ({
                     title: data.find(i => i.id === `servicio_${num}_title`)?.value || `Servicio ${num}`,
                     desc: data.find(i => i.id === `servicio_${num}_desc`)?.value || 'Descripción pendiente...',
                     image: data.find(i => i.id === `servicio_${num}_image`)?.value || (num === 1 ? '/services/aseguramiento.png' : '/about/mission.png')
@@ -61,10 +62,11 @@ export default function ServiciosPage() {
                     marginTop: '60px'
                 }}>
                     {(servicesData.length > 0 ? servicesData : [
-                        { title: "Aseguramiento Metrológico", desc: "Garantizamos la trazabilidad y confiabilidad de sus mediciones según estándares internacionales.", image: "/about/mission.png" },
+                        { title: "Aseguramiento Metrológico", desc: "Garantizamos la trazabilidad y confiabilidad de sus mediciones según estándares internacionales.", image: "/services/aseguramiento.png" },
                         { title: "Capacitación", desc: "Formación especializada en metrología y uso de instrumentación técnica.", image: "/about/mission.png" },
                         { title: "Calibración", desc: "Verificación y calibración precisa de instrumentos en diversas magnitudes.", image: "/about/mission.png" },
-                        { title: "Suministros", desc: "Equipos y suministros técnicos de alta calidad para sus procesos industriales.", image: "/about/mission.png" }
+                        { title: "Suministros", desc: "Equipos y suministros técnicos de alta calidad para sus procesos industriales.", image: "/about/mission.png" },
+                        { title: "Diagnóstico", desc: "Diagnóstico, mantenimiento y verificación técnica integral.", image: "/about/mission.png" }
                     ]).map((service, i) => (
                         <div key={i} style={{
                             borderRadius: '16px',
