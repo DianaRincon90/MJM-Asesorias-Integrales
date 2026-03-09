@@ -29,7 +29,7 @@ export default function ServiciosPage() {
                 const dynamicServices = [1, 2, 3, 4].map(num => ({
                     title: data.find(i => i.id === `servicio_${num}_title`)?.value || `Servicio ${num}`,
                     desc: data.find(i => i.id === `servicio_${num}_desc`)?.value || 'Descripción pendiente...',
-                    image: data.find(i => i.id === `servicio_${num}_image`)?.value || '/about/mission.png'
+                    image: data.find(i => i.id === `servicio_${num}_image`)?.value || (num === 1 ? '/services/aseguramiento.png' : '/about/mission.png')
                 }))
                 // Only set if at least one service has a custom title (basic check to see if DB has data)
                 if (data.some(i => i.id.startsWith('servicio_'))) {
