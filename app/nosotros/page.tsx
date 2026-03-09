@@ -29,10 +29,10 @@ export default function NosotrosPage() {
                 overflow: 'hidden'
             }}>
                 <Image
-                    src={teamImage} // Usar directamente la variable dinámica en lugar de la foto fija
+                    src="/about/banner.jpg"
                     alt="MJM Banner"
                     fill
-                    style={{ objectFit: 'cover', objectPosition: 'center 25%', filter: 'brightness(0.5)' }}
+                    style={{ objectFit: 'cover', objectPosition: 'center 30%', filter: 'brightness(0.7)' }}
                     priority
                 />
                 <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', padding: '0 20px' }}>
