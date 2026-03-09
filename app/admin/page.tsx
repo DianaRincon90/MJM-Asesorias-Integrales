@@ -127,7 +127,7 @@ export default function AdminDashboard() {
     if (!session || loading) return <div style={{ padding: '50px', textAlign: 'center', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Cargando administrador...</div>
 
     return (
-        <div style={{ display: 'flex', height: '100vh', marginTop: '-100px' }}>
+        <div style={{ display: 'flex', height: '100vh', paddingTop: '100px' }}>
             {/* Sidebar */}
             <aside style={{
                 width: '280px',
@@ -135,7 +135,8 @@ export default function AdminDashboard() {
                 color: 'white',
                 padding: '40px 20px',
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                height: 'calc(100vh - 100px)'
             }}>
                 <h2 style={{ fontSize: '1.2rem', marginBottom: '40px', color: 'var(--mjm-orange)' }}>ADMIN DASHBOARD</h2>
                 <nav style={{ display: 'flex', flexDirection: 'column', gap: '10px', flex: 1 }}>
