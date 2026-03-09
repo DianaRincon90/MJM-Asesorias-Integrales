@@ -28,9 +28,18 @@ export default function ServiciosPage() {
                 if (titleData?.value) setTitle(titleData.value)
                 if (subtitleData?.value) setSubtitle(subtitleData.value)
 
+                const defaultTitles = ["Aseguramiento Metrológico", "Capacitación", "Calibración", "Suministros", "Diagnóstico"];
+                const defaultDescs = [
+                    "Garantizamos la trazabilidad y confiabilidad de sus mediciones según estándares internacionales.",
+                    "Formación especializada en metrología y uso de instrumentación técnica.",
+                    "Verificación y calibración precisa de instrumentos en diversas magnitudes.",
+                    "Equipos y suministros técnicos de alta calidad para sus procesos productivos.",
+                    "Diagnóstico, mantenimiento y verificación técnica integral de estado funcional."
+                ];
+
                 const dynamicServices = [1, 2, 3, 4, 5].map(num => ({
-                    title: data.find(i => i.id === `servicio_${num}_title`)?.value || `Servicio ${num}`,
-                    desc: data.find(i => i.id === `servicio_${num}_desc`)?.value || 'Descripción pendiente...',
+                    title: data.find(i => i.id === `servicio_${num}_title`)?.value || defaultTitles[num - 1],
+                    desc: data.find(i => i.id === `servicio_${num}_desc`)?.value || defaultDescs[num - 1],
                     image: data.find(i => i.id === `servicio_${num}_image`)?.value || (num === 1 ? '/services/aseguramiento.png' : '/about/mission.png')
                 }))
                 // Only set if at least one service has a custom title (basic check to see if DB has data)
@@ -93,6 +102,46 @@ export default function ServiciosPage() {
                                     { icon: <Database size={32} className="text-orange" />, title: "Levantamiento de Información", desc: "Recopilación exhaustiva de datos técnicos y metrológicos para establecer la línea base del aseguramiento" },
                                     { icon: <CalendarDays size={32} className="text-orange" />, title: "Cronogramas Integrados", desc: "Planificación estratégica de rutinas para minimizar tiempos de inactividad" },
                                     { icon: <BarChart3 size={32} className="text-orange" />, title: "Indicadores de Gestión", desc: "Visualización de datos y métricas clave para la toma de decisiones basada en evidencia" }
+                                ]
+                            };
+                        } else if (i === 1) {
+                            subServices = {
+                                title: "Eventos y Capacitaciones",
+                                desc: "Generamos espacios para nuestros clientes y aliados, con el fin de promover la cultura metrológica, fortalecer conceptos y apoyar la aclaración de inquietudes.",
+                                items: [
+                                    { icon: <BookOpen size={32} className="text-orange" />, title: "Conceptos Básicos", desc: "Formación en conceptos fundamentales de metrología aplicable a su industria." },
+                                    { icon: <Wrench size={32} className="text-orange" />, title: "Uso de Instrumentos", desc: "Capacitación práctica en el uso y manipulación adecuada de instrumentos de medición." },
+                                    { icon: <CheckCircle2 size={32} className="text-orange" />, title: "Interpretación", desc: "Guía experta para la correcta lectura e interpretación de certificados de calibración." }
+                                ]
+                            };
+                        } else if (i === 2) {
+                            subServices = {
+                                title: "Servicios de Calibración, Verificación y Mantenimiento",
+                                desc: "Fortalecemos la confianza metrológica en la toma de mediciones a través de servicios de calidad, responsabilidad y compromiso.",
+                                items: [
+                                    { icon: <Settings size={32} className="text-orange" />, title: "Calibración Trazable", desc: "Servicios de calibración con patrones directamente trazables a estándares nacionales o internacionales." },
+                                    { icon: <Shield size={32} className="text-orange" />, title: "Laboratorios Acreditados", desc: "Operaciones locales y convenios con aliados bajo el cumplimiento de lineamientos ISO/IEC 17025." },
+                                    { icon: <Wrench size={32} className="text-orange" />, title: "Verificación y Ajuste", desc: "Comprobación del estado en el que se encuentra su instrumento respecto al error máximo permitido." }
+                                ]
+                            };
+                        } else if (i === 3) {
+                            subServices = {
+                                title: "Suministros e Instrumentación",
+                                desc: "Suministramos productos orientados a optimizar la medición y análisis de variables operacionales.",
+                                items: [
+                                    { icon: <Package size={32} className="text-orange" />, title: "Equipos y Repuestos", desc: "Amplio catálogo en instrumentos de medición industrial y repuestos garantizados." },
+                                    { icon: <Shield size={32} className="text-orange" />, title: "Accesorios y Estuches", desc: "Suministro de elementos para la conservación y transporte seguro de los equipos." },
+                                    { icon: <Settings size={32} className="text-orange" />, title: "Complementos Óptimos", desc: "Todo lo necesario para asegurar el óptimo funcionamiento continuo de la instrumentación." }
+                                ]
+                            };
+                        } else if (i === 4) {
+                            subServices = {
+                                title: "Diagnóstico Integral y Verificación",
+                                desc: "Estamos comprometidos con la generación de valor para nuestros clientes a través de diagnósticos rigurosos.",
+                                items: [
+                                    { icon: <ClipboardList size={32} className="text-orange" />, title: "Diagnóstico Técnico", desc: "Evaluación minuciosa e integral del estado funcional y metrológico de la base instalada." },
+                                    { icon: <CheckCircle2 size={32} className="text-orange" />, title: "Mantenimiento Preventivo", desc: "Intervenciones proactivas para prolongar la vida útil de los equipos de medición." },
+                                    { icon: <Database size={32} className="text-orange" />, title: "Reporte de Desempeño", desc: "Entrega de informes consolidados de verificación técnica para toma de decisiones." }
                                 ]
                             };
                         }
