@@ -32,7 +32,7 @@ export default function NosotrosPage() {
                     src="/about/banner.jpg"
                     alt="MJM Banner"
                     fill
-                    style={{ objectFit: 'cover', objectPosition: 'center 30%', filter: 'brightness(0.7)' }}
+                    style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'brightness(0.7)' }}
                     priority
                 />
                 <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', padding: '0 20px' }}>
