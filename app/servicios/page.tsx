@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react'
-import { Shield, BookOpen, Settings, Package } from 'lucide-react'
+import { Shield, BookOpen, Settings, Package, ChevronDown, ChevronUp, ClipboardList, Database, CalendarDays, BarChart3, Wrench, GraduationCap, CheckCircle2 } from 'lucide-react'
 import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 
@@ -9,6 +9,7 @@ export default function ServiciosPage() {
     const [title, setTitle] = useState('Nuestros Servicios')
     const [subtitle, setSubtitle] = useState('Soluciones integrales de aseguramiento metrológico y calidad.')
     const [servicesData, setServicesData] = useState<any[]>([])
+    const [expandedService, setExpandedService] = useState<number | null>(0)
 
     useEffect(() => {
         const fetchContent = async () => {
@@ -56,10 +57,12 @@ export default function ServiciosPage() {
             {/* Services Section */}
             <section className="section-container">
                 <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                    gap: '30px',
-                    marginTop: '60px'
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '20px',
+                    marginTop: '40px',
+                    maxWidth: '1000px',
+                    margin: '40px auto 0 auto'
                 }}>
                     {(servicesData.length > 0 ? servicesData : [
                         { title: "Aseguramiento Metrológico", desc: "Garantizamos la trazabilidad y confiabilidad de sus mediciones según estándares internacionales.", image: "/services/aseguramiento.png" },
@@ -67,23 +70,110 @@ export default function ServiciosPage() {
                         { title: "Calibración", desc: "Verificación y calibración precisa de instrumentos en diversas magnitudes.", image: "/about/mission.png" },
                         { title: "Suministros", desc: "Equipos y suministros técnicos de alta calidad para sus procesos industriales.", image: "/about/mission.png" },
                         { title: "Diagnóstico", desc: "Diagnóstico, mantenimiento y verificación técnica integral.", image: "/about/mission.png" }
-                    ]).map((service, i) => (
-                        <div key={i} style={{
-                            borderRadius: '16px',
-                            backgroundColor: 'white',
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
-                            overflow: 'hidden',
-                            transition: 'transform 0.3s'
-                        }}>
-                            <div style={{ position: 'relative', height: '200px', width: '100%', backgroundColor: '#f4f4f4' }}>
-                                <Image src={service.image} alt={service.title} fill style={{ objectFit: 'cover' }} />
+                    ]).map((service, i) => {
+                        const isExpanded = expandedService === i;
+
+                        // Default sub-services logic
+                        let subServices = {
+                            title: `Planes y Programas de ${service.title}`,
+                            desc: service.desc,
+                            items: [
+                                { icon: <CheckCircle2 size={32} className="text-orange" />, title: "Servicio Integrado", desc: "Detalle del componente esencial o etapa para este proceso que la empresa realiza de principio a fin." },
+                                { icon: <Wrench size={32} className="text-orange" />, title: "Herramientas de Avanzada", desc: "Aplicación de tecnología punta para garantizar resultados por encima del estándar del mercado." },
+                                { icon: <GraduationCap size={32} className="text-orange" />, title: "Equipo Profesional", desc: "Talento humano capacitado y entrenado bajo normas estrictas de calidad nacionales." }
+                            ]
+                        };
+
+                        if (i === 0) {
+                            subServices = {
+                                title: "Planes y Programas de Aseguramiento y Control",
+                                desc: "Gestionamos integralmente sus procesos de medición para garantizar la conformidad y la calidad de sus productos y servicios",
+                                items: [
+                                    { icon: <ClipboardList size={32} className="text-orange" />, title: "Clasificación de Equipos", desc: "Identificación y clasificación detallada de todos los instrumentos de medición para un control efectivo" },
+                                    { icon: <Database size={32} className="text-orange" />, title: "Levantamiento de Información", desc: "Recopilación exhaustiva de datos técnicos y metrológicos para establecer la línea base del aseguramiento" },
+                                    { icon: <CalendarDays size={32} className="text-orange" />, title: "Cronogramas Integrados", desc: "Planificación estratégica de rutinas para minimizar tiempos de inactividad" },
+                                    { icon: <BarChart3 size={32} className="text-orange" />, title: "Indicadores de Gestión", desc: "Visualización de datos y métricas clave para la toma de decisiones basada en evidencia" }
+                                ]
+                            };
+                        }
+
+                        return (
+                            <div key={i} style={{
+                                borderRadius: '12px',
+                                backgroundColor: 'white',
+                                boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
+                                overflow: 'hidden',
+                                border: '1px solid #eee'
+                            }}>
+                                {/* Accordion Header */}
+                                <div
+                                    onClick={() => setExpandedService(isExpanded ? null : i)}
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                        padding: '20px 30px',
+                                        cursor: 'pointer',
+                                        backgroundColor: isExpanded ? '#f8fafc' : 'white',
+                                        transition: 'background-color 0.3s'
+                                    }}
+                                >
+                                    <h2 style={{ fontSize: '1.5rem', color: 'var(--mjm-blue)', margin: 0, fontWeight: 700 }}>
+                                        {service.title}
+                                    </h2>
+                                    <div style={{ color: 'var(--mjm-orange)' }}>
+                                        {isExpanded ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+                                    </div>
+                                </div>
+
+                                {/* Accordion Body */}
+                                {isExpanded && (
+                                    <div style={{ padding: '40px', backgroundColor: '#fdfdfd', borderTop: '1px solid #eee' }}>
+                                        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                                            <h3 style={{ fontSize: '1.8rem', color: 'var(--mjm-blue)', marginBottom: '15px' }}>{subServices.title}</h3>
+                                            <p style={{ opacity: 0.8, fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>{subServices.desc}</p>
+                                        </div>
+
+                                        <div style={{
+                                            display: 'grid',
+                                            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                                            gap: '20px'
+                                        }}>
+                                            {subServices.items.map((item, idx) => (
+                                                <div key={idx} style={{
+                                                    backgroundColor: 'white',
+                                                    padding: '30px 20px',
+                                                    borderRadius: '16px',
+                                                    border: '1px solid #f1f5f9',
+                                                    boxShadow: '0 10px 30px rgba(0,0,0,0.03)',
+                                                    textAlign: 'center',
+                                                    transition: 'transform 0.3s',
+                                                }}
+                                                    onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
+                                                    onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                                                >
+                                                    <div style={{
+                                                        width: '70px',
+                                                        height: '70px',
+                                                        borderRadius: '50%',
+                                                        backgroundColor: '#fff4eb',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        margin: '0 auto 20px auto'
+                                                    }}>
+                                                        {item.icon}
+                                                    </div>
+                                                    <h4 style={{ color: 'var(--mjm-blue)', fontSize: '1.1rem', marginBottom: '15px', minHeight: '40px' }}>{item.title}</h4>
+                                                    <p style={{ color: '#666', fontSize: '0.9rem', lineHeight: 1.5 }}>{item.desc}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
-                            <div style={{ padding: '30px' }}>
-                                <h3 style={{ margin: '0 0 15px', fontSize: '1.5rem', color: 'var(--mjm-blue)' }}>{service.title}</h3>
-                                <p style={{ lineHeight: 1.6, opacity: 0.8, color: '#444' }}>{service.desc}</p>
-                            </div>
-                        </div>
-                    ))}
+                        )
+                    })}
                 </div>
             </section>
 
