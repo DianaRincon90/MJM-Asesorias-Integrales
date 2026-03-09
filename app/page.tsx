@@ -1,14 +1,14 @@
 'use client';
 
-import { Shield, BookOpen, Settings, Package, ArrowRight, Mail, Phone, MessageSquare, MapPin, Clock } from 'lucide-react'
+import { Shield, BookOpen, Settings, Package, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 
 export default function Home() {
     return (
         <div>
             {/* Hero Section */}
-            <section id="inicio" style={{
-                height: '80vh',
+            <section style={{
+                height: '85vh',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -17,263 +17,79 @@ export default function Home() {
                 textAlign: 'center',
                 padding: '0 20px'
             }}>
-                <div style={{ maxWidth: '800px' }}>
-                    <h1 style={{ fontSize: '3.5rem', marginBottom: '20px', fontWeight: 800 }}>
+                <div style={{ maxWidth: '900px' }}>
+                    <h1 style={{ fontSize: '4rem', marginBottom: '25px', fontWeight: 800, lineHeight: 1.1 }}>
                         Expertos en <span className="text-orange">Aseguramiento Metrológico</span>
                     </h1>
-                    <p style={{ fontSize: '1.2rem', marginBottom: '40px', opacity: 0.9, lineHeight: 1.6 }}>
-                        Consultoría, capacitación, verificación y calibración de instrumentos con los más altos estándares de calidad y confiabilidad.
+                    <p style={{ fontSize: '1.3rem', marginBottom: '45px', opacity: 0.9, lineHeight: 1.6 }}>
+                        Consultoría, capacitación, verificación y calibración con los más altos estándares de calidad y trazabilidad internacional.
                     </p>
                     <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
-                        <a href="#contacto" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
-                            Contáctanos <ArrowRight size={18} style={{ marginLeft: '5px' }} />
+                        <a href="/contacto" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
+                            Contáctanos <ArrowRight size={18} style={{ marginLeft: '10px' }} />
                         </a>
-                        <a href="#servicios" style={{
-                            padding: '12px 24px',
-                            borderRadius: '8px',
+                        <a href="/servicios" style={{
+                            padding: '14px 28px',
+                            borderRadius: '12px',
                             border: '2px solid white',
                             background: 'transparent',
                             color: 'white',
                             fontWeight: 600,
-                            textDecoration: 'none'
-                        }}>Nuestros Servicios</a>
+                            textDecoration: 'none',
+                            transition: 'all 0.3s'
+                        }}>Explorar Servicios</a>
                     </div>
                 </div>
             </section>
 
-            {/* Services Section */}
-            <section id="servicios" className="section-container">
-                <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '10px' }}>Nuestros Servicios</h2>
-                <div style={{ width: '60px', height: '4px', backgroundColor: 'var(--mjm-orange)', margin: '0 auto 60px' }}></div>
-
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                    gap: '30px'
-                }}>
-                    {[
-                        {
-                            icon: <Shield size={40} className="text-orange" />,
-                            title: "Aseguramiento Metrológico",
-                            desc: "Garantizamos la trazabilidad y confiabilidad de sus mediciones según estándares internacionales."
-                        },
-                        {
-                            icon: <BookOpen size={40} className="text-orange" />,
-                            title: "Capacitación",
-                            desc: "Formación especializada en metrología y uso de instrumentación técnica."
-                        },
-                        {
-                            icon: <Settings size={40} className="text-orange" />,
-                            title: "Calibración",
-                            desc: "Verificación y calibración precisa de instrumentos en diversas magnitudes."
-                        },
-                        {
-                            icon: <Package size={40} className="text-orange" />,
-                            title: "Suministros",
-                            desc: "Equipos y suministros técnicos de alta calidad para sus procesos industriales."
-                        }
-                    ].map((service, i) => (
-                        <div key={i} style={{
-                            padding: '40px',
-                            borderRadius: '16px',
-                            backgroundColor: 'var(--mjm-gray)',
-                            transition: 'transform 0.3s'
-                        }}>
-                            {service.icon}
-                            <h3 style={{ margin: '20px 0 10px', fontSize: '1.5rem' }}>{service.title}</h3>
-                            <p style={{ lineHeight: 1.6, opacity: 0.8 }}>{service.desc}</p>
+            {/* Quick Overview Section */}
+            <section className="section-container">
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
+                    <div style={{ padding: '40px', borderRadius: '24px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                        <div style={{ width: '60px', height: '60px', backgroundColor: 'var(--mjm-blue)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '25px' }}>
+                            <Shield className="text-orange" size={32} />
                         </div>
-                    ))}
+                        <h3 style={{ fontSize: '1.8rem', marginBottom: '15px' }}>Confianza Técnica</h3>
+                        <p style={{ opacity: 0.7, lineHeight: 1.6 }}>Garantizamos la precisión en sus procesos a través de un riguroso aseguramiento metrológico y normativo.</p>
+                        <a href="/servicios" style={{ color: 'var(--mjm-orange)', fontWeight: 600, textDecoration: 'none', marginTop: '20px', display: 'inline-block' }}>Ver detalles →</a>
+                    </div>
+                    <div style={{ padding: '40px', borderRadius: '24px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                        <div style={{ width: '60px', height: '60px', backgroundColor: 'var(--mjm-blue)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '25px' }}>
+                            <BookOpen className="text-orange" size={32} />
+                        </div>
+                        <h3 style={{ fontSize: '1.8rem', marginBottom: '15px' }}>Formación Experta</h3>
+                        <p style={{ opacity: 0.7, lineHeight: 1.6 }}>Capacitamos a su personal con metodologías avanzadas y conocimiento práctico de vanguardia.</p>
+                        <a href="/servicios" style={{ color: 'var(--mjm-orange)', fontWeight: 600, textDecoration: 'none', marginTop: '20px', display: 'inline-block' }}>Ver capacitaciones →</a>
+                    </div>
+                    <div style={{ padding: '40px', borderRadius: '24px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                        <div style={{ width: '60px', height: '60px', backgroundColor: 'var(--mjm-blue)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '25px' }}>
+                            <Settings className="text-orange" size={32} />
+                        </div>
+                        <h3 style={{ fontSize: '1.8rem', marginBottom: '15px' }}>Calibración Precisa</h3>
+                        <p style={{ opacity: 0.7, lineHeight: 1.6 }}>Servicios de calibración de alta exactitud para asegurar la excelencia en sus mediciones industriales.</p>
+                        <a href="/servicios" style={{ color: 'var(--mjm-orange)', fontWeight: 600, textDecoration: 'none', marginTop: '20px', display: 'inline-block' }}>Ver magnitudes →</a>
+                    </div>
                 </div>
             </section>
 
-            {/* About Section */}
-            <section id="nosotros" style={{ backgroundColor: 'var(--mjm-blue)', color: 'white' }}>
+            {/* Featured Section */}
+            <section style={{ backgroundColor: 'var(--mjm-blue)', color: 'white', padding: '100px 0' }}>
                 <div className="section-container">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '60px', flexWrap: 'wrap', marginBottom: '60px' }}>
-                        <div style={{ flex: '1 1 400px' }}>
-                            <h2 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>Sobre Nosotros</h2>
-                            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '20px', opacity: 0.9 }}>
-                                En Asesorías Integrales MJM, somos su aliado estratégico en calidad y precisión. Con años de experiencia, brindamos soluciones integrales que optimizan los procesos de medición de nuestros clientes.
-                            </p>
-                            <ul style={{ listStyle: 'none', opacity: 0.9 }}>
-                                <li style={{ marginBottom: '10px' }}>✓ Certificación ISO 9001</li>
-                                <li style={{ marginBottom: '10px' }}>✓ Innovación Continua</li>
-                                <li style={{ marginBottom: '10px' }}>✓ Personal Altamente Calificado</li>
-                            </ul>
-                        </div>
-                        <div style={{ flex: '1 1 400px', height: '400px', borderRadius: '16px', overflow: 'hidden', position: 'relative' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '80px', flexWrap: 'wrap' }}>
+                        <div style={{ flex: '1 1 500px', position: 'relative', height: '500px', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px rgba(0,0,0,0.3)' }}>
                             <Image
                                 src="/about/team-cimga.jpg"
-                                alt="MJM Team at CIMGA"
+                                alt="MJM en CIMGA"
                                 fill
                                 style={{ objectFit: 'cover' }}
                             />
                         </div>
-                    </div>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
-                        <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '12px', color: 'black' }}>
-                            <div style={{ position: 'relative', height: '200px', marginBottom: '20px' }}>
-                                <Image src="/about/mission.png" alt="Misión Visión" fill style={{ objectFit: 'contain' }} />
-                            </div>
-                            <h3 style={{ textAlign: 'center', color: 'var(--mjm-blue)' }}>Nuestra Filosofía</h3>
-                        </div>
-                        <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '12px', color: 'black' }}>
-                            <div style={{ position: 'relative', height: '200px', marginBottom: '20px' }}>
-                                <Image src="/about/certification.jpg" alt="Certificación" fill style={{ objectFit: 'contain' }} />
-                            </div>
-                            <h3 style={{ textAlign: 'center', color: 'var(--mjm-blue)' }}>Calidad Certificada</h3>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Allies Section */}
-            <section className="section-container" style={{ backgroundColor: 'white' }}>
-                <h2 style={{ textAlign: 'center', fontSize: '2rem', marginBottom: '40px', opacity: 0.6 }}>Nuestras Marcas Aliadas</h2>
-                <div style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: '40px',
-                    opacity: 1
-                }}>
-                    {[
-                        { name: 'UNI-T', src: '/brands/uni-t.jpg' },
-                        { name: 'Fluke', src: '/brands/fluke.png' },
-                        { name: 'Wilcoxon', src: '/brands/wilcoxon.png' },
-                        { name: 'CTC', src: '/brands/ctc.jpg' },
-                        { name: 'DeltaTrak', src: '/brands/deltatrak.jpg' },
-                        { name: 'SKF', src: '/brands/skf.png' },
-                        { name: 'Easy-Laser', src: '/brands/easylaser.png' }
-                    ].map((brand) => (
-                        <div key={brand.name} style={{
-                            width: '160px',
-                            height: '90px',
-                            position: 'relative',
-                            filter: 'grayscale(100%)',
-                            transition: 'filter 0.3s'
-                        }} onMouseOver={(e) => e.currentTarget.style.filter = 'none'} onMouseOut={(e) => e.currentTarget.style.filter = 'grayscale(100%)'}>
-                            <Image
-                                src={brand.src}
-                                alt={brand.name}
-                                fill
-                                style={{ objectFit: 'contain' }}
-                            />
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* Contact Section */}
-            <section id="contacto" style={{ backgroundColor: '#1B365D', color: 'white', padding: '100px 0' }}>
-                <div className="section-container">
-                    <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-                        <h2 style={{ fontSize: '2.5rem', marginBottom: '15px' }}>Contáctanos</h2>
-                        <p style={{ opacity: 0.8, fontSize: '1.1rem' }}>
-                            Estamos listos para atender sus requerimientos y brindarle soluciones metrológicas de calidad
-                        </p>
-                    </div>
-
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                        gap: '40px'
-                    }}>
-                        {/* Contact Info Card */}
-                        <div style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '40px', borderRadius: '16px' }}>
-                            <h3 style={{ fontSize: '1.5rem', marginBottom: '30px' }}>Información de Contacto</h3>
-
-                            <div style={{ display: 'flex', gap: '15px', marginBottom: '25px' }}>
-                                <Mail className="text-orange" />
-                                <div>
-                                    <p style={{ fontWeight: 600 }}>Email</p>
-                                    <p style={{ opacity: 0.8 }}>proyectos@asesoriasmjm.com</p>
-                                    <p style={{ opacity: 0.8 }}>comercial.asesoriasmjm@gmail.com</p>
-                                </div>
-                            </div>
-
-                            <div style={{ display: 'flex', gap: '15px', marginBottom: '25px' }}>
-                                <Phone className="text-orange" />
-                                <div>
-                                    <p style={{ fontWeight: 600 }}>Teléfonos</p>
-                                    <p style={{ opacity: 0.8 }}>+57 315 9253952</p>
-                                    <p style={{ opacity: 0.8 }}>+57 313 7960800</p>
-                                </div>
-                            </div>
-
-                            <div style={{ display: 'flex', gap: '15px', marginBottom: '25px' }}>
-                                <MessageSquare className="text-orange" />
-                                <div>
-                                    <p style={{ fontWeight: 600 }}>WhatsApp</p>
-                                    <p style={{ opacity: 0.8 }}>+57 315 9253952</p>
-                                    <p style={{ opacity: 0.8 }}>+57 313 7960800</p>
-                                </div>
-                            </div>
-
-                            <div style={{ display: 'flex', gap: '15px' }}>
-                                <MapPin className="text-orange" />
-                                <div>
-                                    <p style={{ fontWeight: 600 }}>Ubicación</p>
-                                    <p style={{ opacity: 0.8 }}>Cl 2 #71d-84, Bogotá, Colombia</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Map and Schedule */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                            {/* Map (Embed or Placeholder) */}
-                            <div style={{
-                                height: '250px',
-                                backgroundColor: 'rgba(255,255,255,0.1)',
-                                borderRadius: '16px',
-                                overflow: 'hidden',
-                                position: 'relative'
-                            }}>
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.844342894584!2d-74.13781702416954!3d4.62186594247271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9ebba6441589%3A0xe5a3c9d784cfc804!2sCl.%202%20%2371d-84%2C%20Bogot%C3%A1!5e0!3m2!1sen!2sco!4v1709565000000!5m2!1sen!2sco"
-                                    width="100%"
-                                    height="100%"
-                                    style={{ border: 0 }}
-                                    allowFullScreen
-                                    loading="lazy"
-                                ></iframe>
-                            </div>
-
-                            {/* Schedule */}
-                            <div style={{ backgroundColor: 'var(--mjm-orange)', padding: '25px', borderRadius: '16px', color: 'white' }}>
-                                <div style={{ display: 'flex', gap: '10px', alignItems: 'center', marginBottom: '15px' }}>
-                                    <Clock size={20} />
-                                    <h4 style={{ fontWeight: 700 }}>Horario de Atención</h4>
-                                </div>
-                                <p style={{ fontSize: '0.9rem', marginBottom: '5px' }}>Lunes - Viernes: 8:00 AM - 5:00 PM</p>
-                                <p style={{ fontSize: '0.9rem' }}>Sábados - Domingos: Cerrado</p>
-                                <hr style={{ margin: '15px 0', border: '0', borderTop: '1px solid rgba(255,255,255,0.2)' }} />
-                                <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '5px' }}>Recepción y Entrega de Equipos</h4>
-                                <p style={{ fontSize: '0.9rem' }}>Lunes - Viernes: 8:30 AM - 4:30 PM</p>
-                            </div>
-                        </div>
-
-                        {/* QR and Services */}
-                        <div style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '40px', borderRadius: '16px', textAlign: 'center' }}>
-                            <h3 style={{ fontSize: '1.5rem', marginBottom: '20px' }}>Solicitud de Servicios</h3>
-                            <p style={{ opacity: 0.8, fontSize: '0.9rem', marginBottom: '20px' }}>Escanea el código QR para solicitar nuestros servicios</p>
-                            <a
-                                href="https://docs.google.com/forms/d/e/1FAIpQLScgrsyFcCrP_Aq2j_CAjb5T8IkWJ3Is_RIRaYqPVcLkVRJmsA/viewform"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{ padding: '20px', backgroundColor: 'white', borderRadius: '12px', display: 'inline-block' }}
-                            >
-                                <Image
-                                    src="/brands/qr-service.jpg"
-                                    alt="QR Code Solicitud de Servicios"
-                                    width={150}
-                                    height={150}
-                                />
-                            </a>
-                            <p style={{ marginTop: '20px', fontSize: '0.8rem', opacity: 0.6 }}>Click en el código QR para acceder al formulario</p>
+                        <div style={{ flex: '1 1 400px' }}>
+                            <h2 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '30px', color: 'var(--mjm-orange)' }}>Más que asesorías, somos su socio en calidad</h2>
+                            <p style={{ fontSize: '1.2rem', lineHeight: 1.8, marginBottom: '40px', opacity: 0.9 }}>
+                                Descubra nuestra filosofía empresarial y el equipo de expertos que respalda cada uno de nuestros procesos técnicos.
+                            </p>
+                            <a href="/nosotros" className="btn-primary" style={{ textDecoration: 'none' }}>Conocer Nuestra Historia</a>
                         </div>
                     </div>
                 </div>

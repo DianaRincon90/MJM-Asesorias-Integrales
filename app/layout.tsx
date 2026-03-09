@@ -30,10 +30,10 @@ export default function RootLayout({
                 }}>
                     <Logo />
                     <div style={{ display: 'flex', gap: '30px', fontWeight: 600 }}>
-                        <a href="#inicio">Inicio</a>
-                        <a href="#servicios">Servicios</a>
-                        <a href="#nosotros">Nosotros</a>
-                        <a href="#contacto">Contacto</a>
+                        <a href="/">Inicio</a>
+                        <a href="/servicios">Servicios</a>
+                        <a href="/nosotros">Nosotros</a>
+                        <a href="/contacto">Contacto</a>
                         <a href="/login" style={{ color: 'var(--mjm-orange)' }}>Admin</a>
                     </div>
                 </nav>
