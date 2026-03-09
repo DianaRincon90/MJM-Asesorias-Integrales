@@ -280,182 +280,184 @@ export default function AdminDashboard() {
 
                             {/* SERVICIOS TAB */}
                             {contentTab === 'servicios' && (
-                                <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-                                    <h3 style={{ marginBottom: '20px', color: 'var(--mjm-blue)' }}>Encabezado de Servicios</h3>
+                                <>
+                                    <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+                                        <h3 style={{ marginBottom: '20px', color: 'var(--mjm-blue)' }}>Encabezado de Servicios</h3>
 
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                                        <div>
-                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Título de la Página</label>
-                                            <input
-                                                type="text"
-                                                value={content.servicios_title}
-                                                onChange={(e) => handleTextChange('servicios_title', e.target.value)}
-                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                                            />
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                                            <div>
+                                                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Título de la Página</label>
+                                                <input
+                                                    type="text"
+                                                    value={content.servicios_title}
+                                                    onChange={(e) => handleTextChange('servicios_title', e.target.value)}
+                                                    style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Descripción o Subtítulo</label>
+                                                <textarea
+                                                    value={content.servicios_subtitle}
+                                                    onChange={(e) => handleTextChange('servicios_subtitle', e.target.value)}
+                                                    rows={2}
+                                                    style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem', resize: 'vertical' }}
+                                                />
+                                            </div>
+                                            <button
+                                                onClick={() => saveTextContent(['servicios_title', 'servicios_subtitle'])}
+                                                disabled={saving}
+                                                className="btn-primary"
+                                                style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px' }}>
+                                                <Save size={18} /> {saving ? 'Guardando...' : 'Guardar Encabezado'}
+                                            </button>
                                         </div>
-                                        <div>
-                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Descripción o Subtítulo</label>
-                                            <textarea
-                                                value={content.servicios_subtitle}
-                                                onChange={(e) => handleTextChange('servicios_subtitle', e.target.value)}
-                                                rows={2}
-                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem', resize: 'vertical' }}
-                                            />
-                                        </div>
-                                        <button
-                                            onClick={() => saveTextContent(['servicios_title', 'servicios_subtitle'])}
-                                            disabled={saving}
-                                            className="btn-primary"
-                                            style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px' }}>
-                                            <Save size={18} /> {saving ? 'Guardando...' : 'Guardar Encabezado'}
-                                        </button>
                                     </div>
-                                </div>
-                                
-                                <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', marginTop: '30px' }}>
-                                    <h3 style={{ marginBottom: '20px', color: 'var(--mjm-blue)' }}>Tarjetas de Servicios</h3>
-                                    <p style={{ opacity: 0.7, marginBottom: '20px' }}>A continuación puedes configurar cada uno de los 4 servicios principales mostrados en tarjetas.</p>
-                                    
-                                    {[1, 2, 3, 4].map((num) => {
-                                        const titleKey = `servicio_${num}_title` as keyof typeof content;
-                                        const descKey = `servicio_${num}_desc` as keyof typeof content;
-                                        const imageKey = `servicio_${num}_image` as keyof typeof content;
 
-                                        return (
-                                        <div key={num} style={{ borderBottom: num < 4 ? '1px solid #e2e8f0' : 'none', paddingBottom: '30px', marginBottom: '30px' }}>
-                                            <h4 style={{ color: 'var(--mjm-orange)', marginBottom: '15px' }}>Servicio #{num}</h4>
-                                            
+                                    <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', marginTop: '30px' }}>
+                                        <h3 style={{ marginBottom: '20px', color: 'var(--mjm-blue)' }}>Tarjetas de Servicios</h3>
+                                        <p style={{ opacity: 0.7, marginBottom: '20px' }}>A continuación puedes configurar cada uno de los 4 servicios principales mostrados en tarjetas.</p>
+
+                                        {[1, 2, 3, 4].map((num) => {
+                                            const titleKey = `servicio_${num}_title` as keyof typeof content;
+                                            const descKey = `servicio_${num}_desc` as keyof typeof content;
+                                            const imageKey = `servicio_${num}_image` as keyof typeof content;
+
+                                            return (
+                                                <div key={num} style={{ borderBottom: num < 4 ? '1px solid #e2e8f0' : 'none', paddingBottom: '30px', marginBottom: '30px' }}>
+                                                    <h4 style={{ color: 'var(--mjm-orange)', marginBottom: '15px' }}>Servicio #{num}</h4>
+
+                                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                                                        <div>
+                                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Título del Servicio</label>
+                                                            <input
+                                                                type="text"
+                                                                value={content[titleKey]}
+                                                                onChange={(e) => handleTextChange(titleKey, e.target.value)}
+                                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem', marginBottom: '15px' }}
+                                                            />
+
+                                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Descripción Breve</label>
+                                                            <textarea
+                                                                value={content[descKey]}
+                                                                onChange={(e) => handleTextChange(descKey, e.target.value)}
+                                                                rows={3}
+                                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem', resize: 'vertical', marginBottom: '15px' }}
+                                                            />
+
+                                                            <button
+                                                                onClick={() => saveTextContent([titleKey, descKey])}
+                                                                disabled={saving}
+                                                                className="btn-primary"
+                                                                style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                                                <Save size={18} /> Guardar Textos S. {num}
+                                                            </button>
+                                                        </div>
+
+                                                        <div>
+                                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Imagen / Banner del Servicio</label>
+                                                            <div style={{ position: 'relative', height: '150px', width: '100%', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#f0f0f0', border: '1px solid #e2e8f0', marginBottom: '15px' }}>
+                                                                {content[imageKey] ? (
+                                                                    <Image src={content[imageKey]} alt={`Servicio ${num}`} fill style={{ objectFit: 'cover' }} />
+                                                                ) : (
+                                                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#888', fontSize: '0.9rem' }}>Sin imagen (use la opción de abajo)</div>
+                                                                )}
+                                                            </div>
+
+                                                            <input
+                                                                type="file"
+                                                                accept="image/*"
+                                                                onChange={(e) => {
+                                                                    const file = e.target.files?.[0];
+                                                                    if (file) {
+                                                                        handleImageUpload(e, imageKey);
+                                                                    }
+                                                                }}
+                                                                style={{ display: 'none' }}
+                                                                id={`image-upload-srv-${num}`}
+                                                                disabled={uploading}
+                                                            />
+                                                            <label htmlFor={`image-upload-srv-${num}`} style={{
+                                                                display: 'inline-flex', alignItems: 'center', gap: '10px',
+                                                                padding: '10px 20px', backgroundColor: 'var(--mjm-blue)', color: 'white',
+                                                                borderRadius: '8px', cursor: uploading ? 'not-allowed' : 'pointer',
+                                                                fontWeight: 600, opacity: uploading ? 0.7 : 1, transition: 'all 0.3s', fontSize: '0.9rem'
+                                                            }}>
+                                                                <Upload size={16} />
+                                                                {uploading ? 'Subiendo...' : 'Actualizar Imagen'}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                            )}
+
+                                    {/* CONTACTO TAB */}
+                                    {contentTab === 'contacto' && (
+                                        <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+                                            <h3 style={{ marginBottom: '20px', color: 'var(--mjm-blue)' }}>Información de Contacto</h3>
+
                                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                                                 <div>
-                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Título del Servicio</label>
+                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Correo Principal</label>
                                                     <input
                                                         type="text"
-                                                        value={content[titleKey]}
-                                                        onChange={(e) => handleTextChange(titleKey, e.target.value)}
-                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem', marginBottom: '15px' }}
+                                                        value={content.contacto_email_1}
+                                                        onChange={(e) => handleTextChange('contacto_email_1', e.target.value)}
+                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
                                                     />
-                                                    
-                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Descripción Breve</label>
-                                                    <textarea
-                                                        value={content[descKey]}
-                                                        onChange={(e) => handleTextChange(descKey, e.target.value)}
-                                                        rows={3}
-                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem', resize: 'vertical', marginBottom: '15px' }}
-                                                    />
-                                                    
-                                                    <button
-                                                        onClick={() => saveTextContent([titleKey, descKey])}
-                                                        disabled={saving}
-                                                        className="btn-primary"
-                                                        style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                                        <Save size={18} /> Guardar Textos S. {num}
-                                                    </button>
                                                 </div>
-                                                
                                                 <div>
-                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Imagen / Banner del Servicio</label>
-                                                    <div style={{ position: 'relative', height: '150px', width: '100%', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#f0f0f0', border: '1px solid #e2e8f0', marginBottom: '15px' }}>
-                                                        {content[imageKey] ? (
-                                                            <Image src={content[imageKey]} alt={`Servicio ${num}`} fill style={{ objectFit: 'cover' }} />
-                                                        ) : (
-                                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#888', fontSize: '0.9rem' }}>Sin imagen (use la opción de abajo)</div>
-                                                        )}
-                                                    </div>
-                                                    
+                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Correo Secundario</label>
                                                     <input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        onChange={(e) => {
-                                                            const file = e.target.files?.[0];
-                                                            if (file) {
-                                                                handleImageUpload(e, imageKey);
-                                                            }
-                                                        }}
-                                                        style={{ display: 'none' }}
-                                                        id={`image-upload-srv-${num}`}
-                                                        disabled={uploading}
+                                                        type="text"
+                                                        value={content.contacto_email_2}
+                                                        onChange={(e) => handleTextChange('contacto_email_2', e.target.value)}
+                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
                                                     />
-                                                    <label htmlFor={`image-upload-srv-${num}`} style={{
-                                                        display: 'inline-flex', alignItems: 'center', gap: '10px',
-                                                        padding: '10px 20px', backgroundColor: 'var(--mjm-blue)', color: 'white',
-                                                        borderRadius: '8px', cursor: uploading ? 'not-allowed' : 'pointer',
-                                                        fontWeight: 600, opacity: uploading ? 0.7 : 1, transition: 'all 0.3s', fontSize: '0.9rem'
-                                                    }}>
-                                                        <Upload size={16} />
-                                                        {uploading ? 'Subiendo...' : 'Actualizar Imagen'}
-                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Teléfono / Celular 1</label>
+                                                    <input
+                                                        type="text"
+                                                        value={content.contacto_phone_1}
+                                                        onChange={(e) => handleTextChange('contacto_phone_1', e.target.value)}
+                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Teléfono / Celular 2</label>
+                                                    <input
+                                                        type="text"
+                                                        value={content.contacto_phone_2}
+                                                        onChange={(e) => handleTextChange('contacto_phone_2', e.target.value)}
+                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
+                                                    />
+                                                </div>
+                                                <div style={{ gridColumn: '1 / -1' }}>
+                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Dirección Física</label>
+                                                    <input
+                                                        type="text"
+                                                        value={content.contacto_address}
+                                                        onChange={(e) => handleTextChange('contacto_address', e.target.value)}
+                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
+                                                    />
                                                 </div>
                                             </div>
+                                            <button
+                                                onClick={() => saveTextContent(['contacto_email_1', 'contacto_email_2', 'contacto_phone_1', 'contacto_phone_2', 'contacto_address'])}
+                                                disabled={saving}
+                                                className="btn-primary"
+                                                style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '30px' }}>
+                                                <Save size={18} /> {saving ? 'Guardando...' : 'Guardar Información de Contacto'}
+                                            </button>
                                         </div>
-                                    )})}
+                                    )}
                                 </div>
-                            )}
-
-                            {/* CONTACTO TAB */}
-                            {contentTab === 'contacto' && (
-                                <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-                                    <h3 style={{ marginBottom: '20px', color: 'var(--mjm-blue)' }}>Información de Contacto</h3>
-
-                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                                        <div>
-                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Correo Principal</label>
-                                            <input
-                                                type="text"
-                                                value={content.contacto_email_1}
-                                                onChange={(e) => handleTextChange('contacto_email_1', e.target.value)}
-                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Correo Secundario</label>
-                                            <input
-                                                type="text"
-                                                value={content.contacto_email_2}
-                                                onChange={(e) => handleTextChange('contacto_email_2', e.target.value)}
-                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Teléfono / Celular 1</label>
-                                            <input
-                                                type="text"
-                                                value={content.contacto_phone_1}
-                                                onChange={(e) => handleTextChange('contacto_phone_1', e.target.value)}
-                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Teléfono / Celular 2</label>
-                                            <input
-                                                type="text"
-                                                value={content.contacto_phone_2}
-                                                onChange={(e) => handleTextChange('contacto_phone_2', e.target.value)}
-                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                                            />
-                                        </div>
-                                        <div style={{ gridColumn: '1 / -1' }}>
-                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Dirección Física</label>
-                                            <input
-                                                type="text"
-                                                value={content.contacto_address}
-                                                onChange={(e) => handleTextChange('contacto_address', e.target.value)}
-                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                                            />
-                                        </div>
-                                    </div>
-                                    <button
-                                        onClick={() => saveTextContent(['contacto_email_1', 'contacto_email_2', 'contacto_phone_1', 'contacto_phone_2', 'contacto_address'])}
-                                        disabled={saving}
-                                        className="btn-primary"
-                                        style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '30px' }}>
-                                        <Save size={18} /> {saving ? 'Guardando...' : 'Guardar Información de Contacto'}
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </>
+                        </>
                 )}
-            </main>
+                    </main>
         </div>
     )
 }
