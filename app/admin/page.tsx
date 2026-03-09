@@ -14,12 +14,24 @@ export default function AdminDashboard() {
     const [saving, setSaving] = useState(false)
 
     // Content State
-    const [content, setContent] = useState({
-        nosotros_url: '',
+    const [content, setContent] = useState<Record<string, string>>({
         home_hero_title: '',
         home_hero_subtitle: '',
+        nosotros_url: '',
         servicios_title: '',
         servicios_subtitle: '',
+        servicio_1_title: '',
+        servicio_1_desc: '',
+        servicio_1_image: '',
+        servicio_2_title: '',
+        servicio_2_desc: '',
+        servicio_2_image: '',
+        servicio_3_title: '',
+        servicio_3_desc: '',
+        servicio_3_image: '',
+        servicio_4_title: '',
+        servicio_4_desc: '',
+        servicio_4_image: '',
         contacto_email_1: '',
         contacto_email_2: '',
         contacto_phone_1: '',
@@ -83,34 +95,36 @@ export default function AdminDashboard() {
         }
     }
 
-    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        try {
-            if (!e.target.files || e.target.files.length === 0) return
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, settingId: string) => {
+        const file = e.target.files?.[0]
+        if (!file) return
 
-            setUploading(true)
-            const file = e.target.files[0]
+        setUploading(true)
+        try {
             const fileExt = file.name.split('.').pop()
-            const fileName = `team-nosotros-${Math.random()}.${fileExt}`
+            const fileName = `${Math.random()}.${fileExt}`
+            const filePath = `${fileName}`
 
             const { error: uploadError } = await supabase.storage
                 .from('website-images')
-                .upload(fileName, file, { cacheControl: '3600', upsert: false })
+                .upload(filePath, file)
 
             if (uploadError) throw uploadError
 
             const { data: { publicUrl } } = supabase.storage
                 .from('website-images')
-                .getPublicUrl(fileName)
+                .getPublicUrl(filePath)
 
-            const { error: dbError } = await supabase
-                .from('site_settings')
-                .upsert({ id: 'nosotros_url', value: publicUrl })
+            setContent(prev => ({ ...prev, [settingId]: publicUrl }))
+
+            const { error: dbError } = await supabase.from('site_settings').upsert({
+                id: settingId,
+                value: publicUrl
+            })
 
             if (dbError) throw dbError
 
-            setContent(prev => ({ ...prev, nosotros_url: publicUrl }))
-            alert('¡Imagen de equipo actualizada correctamente!')
-
+            alert('Imagen actualizada exitosamente')
         } catch (error: any) {
             alert('Error subiendo la imagen: ' + error.message)
         } finally {
@@ -244,7 +258,7 @@ export default function AdminDashboard() {
                                         <input
                                             type="file"
                                             accept="image/*"
-                                            onChange={handleImageUpload}
+                                            onChange={(e) => handleImageUpload(e, 'nosotros_url')}
                                             ref={fileInputRef}
                                             style={{ display: 'none' }}
                                             id="image-upload"
@@ -293,9 +307,87 @@ export default function AdminDashboard() {
                                             disabled={saving}
                                             className="btn-primary"
                                             style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px' }}>
-                                            <Save size={18} /> {saving ? 'Guardando...' : 'Guardar Cambios de Servicios'}
+                                            <Save size={18} /> {saving ? 'Guardando...' : 'Guardar Encabezado'}
                                         </button>
                                     </div>
+                                </div>
+                                
+                                <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', marginTop: '30px' }}>
+                                    <h3 style={{ marginBottom: '20px', color: 'var(--mjm-blue)' }}>Tarjetas de Servicios</h3>
+                                    <p style={{ opacity: 0.7, marginBottom: '20px' }}>A continuación puedes configurar cada uno de los 4 servicios principales mostrados en tarjetas.</p>
+                                    
+                                    {[1, 2, 3, 4].map((num) => {
+                                        const titleKey = `servicio_${num}_title` as keyof typeof content;
+                                        const descKey = `servicio_${num}_desc` as keyof typeof content;
+                                        const imageKey = `servicio_${num}_image` as keyof typeof content;
+
+                                        return (
+                                        <div key={num} style={{ borderBottom: num < 4 ? '1px solid #e2e8f0' : 'none', paddingBottom: '30px', marginBottom: '30px' }}>
+                                            <h4 style={{ color: 'var(--mjm-orange)', marginBottom: '15px' }}>Servicio #{num}</h4>
+                                            
+                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                                                <div>
+                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Título del Servicio</label>
+                                                    <input
+                                                        type="text"
+                                                        value={content[titleKey]}
+                                                        onChange={(e) => handleTextChange(titleKey, e.target.value)}
+                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem', marginBottom: '15px' }}
+                                                    />
+                                                    
+                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Descripción Breve</label>
+                                                    <textarea
+                                                        value={content[descKey]}
+                                                        onChange={(e) => handleTextChange(descKey, e.target.value)}
+                                                        rows={3}
+                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem', resize: 'vertical', marginBottom: '15px' }}
+                                                    />
+                                                    
+                                                    <button
+                                                        onClick={() => saveTextContent([titleKey, descKey])}
+                                                        disabled={saving}
+                                                        className="btn-primary"
+                                                        style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                                        <Save size={18} /> Guardar Textos S. {num}
+                                                    </button>
+                                                </div>
+                                                
+                                                <div>
+                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Imagen / Banner del Servicio</label>
+                                                    <div style={{ position: 'relative', height: '150px', width: '100%', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#f0f0f0', border: '1px solid #e2e8f0', marginBottom: '15px' }}>
+                                                        {content[imageKey] ? (
+                                                            <Image src={content[imageKey]} alt={`Servicio ${num}`} fill style={{ objectFit: 'cover' }} />
+                                                        ) : (
+                                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#888', fontSize: '0.9rem' }}>Sin imagen (use la opción de abajo)</div>
+                                                        )}
+                                                    </div>
+                                                    
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        onChange={(e) => {
+                                                            const file = e.target.files?.[0];
+                                                            if (file) {
+                                                                handleImageUpload(e, imageKey);
+                                                            }
+                                                        }}
+                                                        style={{ display: 'none' }}
+                                                        id={`image-upload-srv-${num}`}
+                                                        disabled={uploading}
+                                                    />
+                                                    <label htmlFor={`image-upload-srv-${num}`} style={{
+                                                        display: 'inline-flex', alignItems: 'center', gap: '10px',
+                                                        padding: '10px 20px', backgroundColor: 'var(--mjm-blue)', color: 'white',
+                                                        borderRadius: '8px', cursor: uploading ? 'not-allowed' : 'pointer',
+                                                        fontWeight: 600, opacity: uploading ? 0.7 : 1, transition: 'all 0.3s', fontSize: '0.9rem'
+                                                    }}>
+                                                        <Upload size={16} />
+                                                        {uploading ? 'Subiendo...' : 'Actualizar Imagen'}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )})}
                                 </div>
                             )}
 
