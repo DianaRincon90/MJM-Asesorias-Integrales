@@ -1,9 +1,26 @@
 'use client';
 
+import { useEffect, useState } from 'react'
 import { Shield, BookOpen, Settings, Package } from 'lucide-react'
 import Image from 'next/image'
+import { supabase } from '@/lib/supabase'
 
 export default function ServiciosPage() {
+    const [title, setTitle] = useState('Nuestros Servicios')
+    const [subtitle, setSubtitle] = useState('Soluciones integrales de aseguramiento metrológico y calidad.')
+
+    useEffect(() => {
+        const fetchContent = async () => {
+            const { data } = await supabase.from('site_settings').select('id, value').in('id', ['servicios_title', 'servicios_subtitle'])
+            if (data) {
+                const titleData = data.find(i => i.id === 'servicios_title')
+                const subtitleData = data.find(i => i.id === 'servicios_subtitle')
+                if (titleData?.value) setTitle(titleData.value)
+                if (subtitleData?.value) setSubtitle(subtitleData.value)
+            }
+        }
+        fetchContent()
+    }, [])
     return (
         <div className="pb-20">
             {/* Services Header */}
@@ -13,8 +30,8 @@ export default function ServiciosPage() {
                 padding: '100px 20px',
                 textAlign: 'center'
             }}>
-                <h1 style={{ fontSize: '3rem', fontWeight: 800 }}>Nuestros Servicios</h1>
-                <p style={{ fontSize: '1.2rem', opacity: 0.9, marginTop: '20px' }}>Soluciones integrales de aseguramiento metrológico y calidad.</p>
+                <h1 style={{ fontSize: '3rem', fontWeight: 800 }}>{title}</h1>
+                <p style={{ fontSize: '1.2rem', opacity: 0.9, marginTop: '20px' }}>{subtitle}</p>
             </div>
 
             {/* Services Section */}

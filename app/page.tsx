@@ -7,13 +7,23 @@ import { supabase } from '@/lib/supabase'
 
 export default function Home() {
     const [teamImage, setTeamImage] = useState('/about/team-cimga.jpg')
+    const [heroTitle, setHeroTitle] = useState('Expertos en Aseguramiento Metrológico')
+    const [heroSubtitle, setHeroSubtitle] = useState('Consultoría, capacitación, verificación y calibración con los más altos estándares de calidad y trazabilidad internacional.')
 
     useEffect(() => {
-        const fetchImage = async () => {
-            const { data } = await supabase.from('site_settings').select('value').eq('id', 'nosotros_url').single()
-            if (data?.value) setTeamImage(data.value)
+        const fetchContent = async () => {
+            const { data } = await supabase.from('site_settings').select('id, value')
+            if (data) {
+                const imgData = data.find(i => i.id === 'nosotros_url')
+                const titleData = data.find(i => i.id === 'home_hero_title')
+                const subtitleData = data.find(i => i.id === 'home_hero_subtitle')
+
+                if (imgData?.value) setTeamImage(imgData.value)
+                if (titleData?.value) setHeroTitle(titleData.value)
+                if (subtitleData?.value) setHeroSubtitle(subtitleData.value)
+            }
         }
-        fetchImage()
+        fetchContent()
     }, [])
 
     return (
@@ -31,10 +41,10 @@ export default function Home() {
             }}>
                 <div style={{ maxWidth: '900px' }}>
                     <h1 style={{ fontSize: '4rem', marginBottom: '25px', fontWeight: 800, lineHeight: 1.1 }}>
-                        Expertos en <span className="text-orange">Aseguramiento Metrológico</span>
+                        <span dangerouslySetInnerHTML={{ __html: heroTitle.replace('Aseguramiento Metrológico', '<span class="text-orange">Aseguramiento Metrológico</span>') }} />
                     </h1>
                     <p style={{ fontSize: '1.3rem', marginBottom: '45px', opacity: 0.9, lineHeight: 1.6 }}>
-                        Consultoría, capacitación, verificación y calibración con los más altos estándares de calidad y trazabilidad internacional.
+                        {heroSubtitle}
                     </p>
                     <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
                         <a href="/contacto" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>

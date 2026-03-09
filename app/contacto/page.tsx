@@ -1,9 +1,36 @@
 'use client';
 
+import { useEffect, useState } from 'react'
 import { Mail, Phone, MessageSquare, MapPin, Clock } from 'lucide-react'
 import Image from 'next/image'
+import { supabase } from '@/lib/supabase'
 
 export default function ContactoPage() {
+    const [contactInfo, setContactInfo] = useState({
+        email_1: 'proyectos@asesoriasmjm.com',
+        email_2: 'comercial.asesoriasmjm@gmail.com',
+        phone_1: '+57 315 9253952',
+        phone_2: '+57 313 7960800',
+        address: 'Cl 2 #71d-84, Bogotá, Colombia'
+    })
+
+    useEffect(() => {
+        const fetchContent = async () => {
+            const { data } = await supabase.from('site_settings').select('id, value').like('id', 'contacto_%')
+            if (data) {
+                const info: any = { ...contactInfo }
+                data.forEach(item => {
+                    if (item.id === 'contacto_email_1') info.email_1 = item.value
+                    if (item.id === 'contacto_email_2') info.email_2 = item.value
+                    if (item.id === 'contacto_phone_1') info.phone_1 = item.value
+                    if (item.id === 'contacto_phone_2') info.phone_2 = item.value
+                    if (item.id === 'contacto_address') info.address = item.value
+                })
+                setContactInfo(info)
+            }
+        }
+        fetchContent()
+    }, [])
     return (
         <div style={{ backgroundColor: '#f8fafc', minHeight: '100vh', paddingBottom: '100px' }}>
             {/* Header */}
@@ -26,8 +53,8 @@ export default function ContactoPage() {
                             <Mail className="text-orange" />
                             <div>
                                 <p style={{ fontWeight: 600 }}>Email</p>
-                                <p style={{ opacity: 0.8 }}>proyectos@asesoriasmjm.com</p>
-                                <p style={{ opacity: 0.8 }}>comercial.asesoriasmjm@gmail.com</p>
+                                <p style={{ opacity: 0.8 }}>{contactInfo.email_1}</p>
+                                <p style={{ opacity: 0.8 }}>{contactInfo.email_2}</p>
                             </div>
                         </div>
 
@@ -35,8 +62,8 @@ export default function ContactoPage() {
                             <Phone className="text-orange" />
                             <div>
                                 <p style={{ fontWeight: 600 }}>Teléfonos</p>
-                                <p style={{ opacity: 0.8 }}>+57 315 9253952</p>
-                                <p style={{ opacity: 0.8 }}>+57 313 7960800</p>
+                                <p style={{ opacity: 0.8 }}>{contactInfo.phone_1}</p>
+                                <p style={{ opacity: 0.8 }}>{contactInfo.phone_2}</p>
                             </div>
                         </div>
 
@@ -44,8 +71,8 @@ export default function ContactoPage() {
                             <MessageSquare className="text-orange" />
                             <div>
                                 <p style={{ fontWeight: 600 }}>WhatsApp</p>
-                                <p style={{ opacity: 0.8 }}>+57 315 9253952</p>
-                                <p style={{ opacity: 0.8 }}>+57 313 7960800</p>
+                                <p style={{ opacity: 0.8 }}>{contactInfo.phone_1}</p>
+                                <p style={{ opacity: 0.8 }}>{contactInfo.phone_2}</p>
                             </div>
                         </div>
 
@@ -53,7 +80,7 @@ export default function ContactoPage() {
                             <MapPin className="text-orange" />
                             <div>
                                 <p style={{ fontWeight: 600 }}>Ubicación</p>
-                                <p style={{ opacity: 0.8 }}>Cl 2 #71d-84, Bogotá, Colombia</p>
+                                <p style={{ opacity: 0.8 }}>{contactInfo.address}</p>
                             </div>
                         </div>
                     </div>
