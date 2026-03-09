@@ -1,9 +1,21 @@
 'use client';
 
+import { useEffect, useState } from 'react'
 import { Shield, BookOpen, Settings, Package, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
+import { supabase } from '@/lib/supabase'
 
 export default function Home() {
+    const [teamImage, setTeamImage] = useState('/about/team-cimga.jpg')
+
+    useEffect(() => {
+        const fetchImage = async () => {
+            const { data } = await supabase.from('site_settings').select('value').eq('id', 'nosotros_url').single()
+            if (data?.value) setTeamImage(data.value)
+        }
+        fetchImage()
+    }, [])
+
     return (
         <div>
             {/* Hero Section */}
@@ -78,7 +90,7 @@ export default function Home() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '80px', flexWrap: 'wrap' }}>
                         <div style={{ flex: '1 1 500px', position: 'relative', height: '500px', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px rgba(0,0,0,0.3)' }}>
                             <Image
-                                src="/about/team-cimga.jpg"
+                                src={teamImage}
                                 alt="MJM en CIMGA"
                                 fill
                                 style={{ objectFit: 'cover', objectPosition: 'center 20%' }}

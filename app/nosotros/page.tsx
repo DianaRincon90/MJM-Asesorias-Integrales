@@ -1,8 +1,20 @@
 'use client';
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { supabase } from '@/lib/supabase'
 
 export default function NosotrosPage() {
+    const [teamImage, setTeamImage] = useState('/about/team-cimga.jpg')
+
+    useEffect(() => {
+        const fetchImage = async () => {
+            const { data } = await supabase.from('site_settings').select('value').eq('id', 'nosotros_url').single()
+            if (data?.value) setTeamImage(data.value)
+        }
+        fetchImage()
+    }, [])
+
     return (
         <div>
             {/* About Banner */}
@@ -50,7 +62,7 @@ export default function NosotrosPage() {
                     </div>
                     <div style={{ flex: '1 1 400px', height: '450px', borderRadius: '24px', overflow: 'hidden', position: 'relative', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
                         <Image
-                            src="/about/team-cimga.jpg"
+                            src={teamImage}
                             alt="MJM Team at CIMGA"
                             fill
                             style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
