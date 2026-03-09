@@ -4,7 +4,7 @@
   --mjm-white: #FFFFFF;
   --mjm-gray: #F4F4F4;
   --mjm-dark-blue: #0D1B2A;
-  
+
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
@@ -64,4 +64,21 @@ button {
   max-width: 1200px;
   margin: 0 auto;
   padding: 80px 20px;
+}
+
+/* Hover Zoom Interactive Effects */
+.hover-zoom-container .zoom-image {
+  transform: scale(1);
+}
+
+.hover-zoom-container:hover .zoom-image {
+  transform: scale(1.1);
+}
+
+.hover-zoom-container .zoom-overlay {
+  opacity: 0;
+}
+
+.hover-zoom-container:hover .zoom-overlay {
+  opacity: 1;
 }
