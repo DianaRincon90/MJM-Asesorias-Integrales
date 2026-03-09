@@ -65,7 +65,7 @@ export default function NosotrosPage() {
                             src={teamImage}
                             alt="MJM Team at CIMGA"
                             fill
-                            style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
+                            style={{ objectFit: 'cover', objectPosition: 'center top' }}
                         />
                     </div>
                 </div>

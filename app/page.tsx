@@ -103,7 +103,7 @@ export default function Home() {
                                 src={teamImage}
                                 alt="MJM en CIMGA"
                                 fill
-                                style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
+                                style={{ objectFit: 'cover', objectPosition: 'center top' }}
                             />
                         </div>
                         <div style={{ flex: '1 1 400px' }}>
