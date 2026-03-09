@@ -3,9 +3,11 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
+import { X, ZoomIn } from 'lucide-react'
 
 export default function NosotrosPage() {
     const [teamImage, setTeamImage] = useState('/about/team-cimga.jpg')
+    const [openImage, setOpenImage] = useState<string | null>(null)
 
     useEffect(() => {
         const fetchImage = async () => {
@@ -72,17 +74,58 @@ export default function NosotrosPage() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '40px' }}>
                     <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
-                        <div style={{ position: 'relative', height: '300px', marginBottom: '30px' }}>
-                            <Image src="/about/mission.png" alt="Misión Visión" fill style={{ objectFit: 'contain' }} />
+                        <div
+                            onClick={() => setOpenImage('/about/mission.png')}
+                            style={{
+                                position: 'relative', height: '300px', marginBottom: '30px', cursor: 'pointer',
+                                overflow: 'hidden', borderRadius: '16px', border: '1px solid #f0f0f0'
+                            }}
+                            className="hover-zoom-container"
+                        >
+                            <Image
+                                src="/about/mission.png"
+                                alt="Misión Visión"
+                                fill
+                                style={{ objectFit: 'contain', transition: 'transform 0.4s ease' }}
+                                className="zoom-image"
+                            />
+                            <div className="zoom-overlay" style={{
+                                position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+                                backgroundColor: 'rgba(0,0,0,0.4)', opacity: 0, transition: 'opacity 0.3s ease',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white'
+                            }}>
+                                <ZoomIn size={48} />
+                            </div>
                         </div>
                         <h3 style={{ textAlign: 'center', color: 'var(--mjm-blue)', fontSize: '1.8rem' }}>Nuestra Filosofía</h3>
                         <p style={{ textAlign: 'center', opacity: 0.7, marginTop: '15px', lineHeight: 1.6 }}>
                             Comprometidos con la innovación continua y la formación de personal altamente calificado para el sector industrial.
                         </p>
                     </div>
+
                     <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
-                        <div style={{ position: 'relative', height: '300px', marginBottom: '30px' }}>
-                            <Image src="/about/certification.jpg" alt="Certificación" fill style={{ objectFit: 'contain' }} />
+                        <div
+                            onClick={() => setOpenImage('/about/certification.jpg')}
+                            style={{
+                                position: 'relative', height: '300px', marginBottom: '30px', cursor: 'pointer',
+                                overflow: 'hidden', borderRadius: '16px', border: '1px solid #f0f0f0'
+                            }}
+                            className="hover-zoom-container"
+                        >
+                            <Image
+                                src="/about/certification.jpg"
+                                alt="Certificación"
+                                fill
+                                style={{ objectFit: 'contain', transition: 'transform 0.4s ease' }}
+                                className="zoom-image"
+                            />
+                            <div className="zoom-overlay" style={{
+                                position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+                                backgroundColor: 'rgba(0,0,0,0.4)', opacity: 0, transition: 'opacity 0.3s ease',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white'
+                            }}>
+                                <ZoomIn size={48} />
+                            </div>
                         </div>
                         <h3 style={{ textAlign: 'center', color: 'var(--mjm-blue)', fontSize: '1.8rem' }}>Calidad Certificada</h3>
                         <p style={{ textAlign: 'center', opacity: 0.7, marginTop: '15px', lineHeight: 1.6 }}>
@@ -90,6 +133,38 @@ export default function NosotrosPage() {
                         </p>
                     </div>
                 </div>
+
+                {/* Modal de Imagen */}
+                {openImage && (
+                    <div
+                        onClick={() => setOpenImage(null)}
+                        style={{
+                            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                            backgroundColor: 'rgba(0,0,0,0.85)', zIndex: 9999,
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            cursor: 'zoom-out', padding: '40px'
+                        }}
+                    >
+                        <button
+                            onClick={() => setOpenImage(null)}
+                            style={{
+                                position: 'absolute', top: '20px', right: '30px',
+                                background: 'transparent', border: 'none', color: 'white',
+                                cursor: 'pointer', zIndex: 10000
+                            }}
+                        >
+                            <X size={40} />
+                        </button>
+                        <div style={{ position: 'relative', width: '100%', maxWidth: '1000px', height: '100%', maxHeight: '85vh' }} onClick={(e) => e.stopPropagation()}>
+                            <Image
+                                src={openImage}
+                                alt="Imagen ampliada"
+                                fill
+                                style={{ objectFit: 'contain' }}
+                            />
+                        </div>
+                    </div>
+                )}
             </section>
         </div>
     )
