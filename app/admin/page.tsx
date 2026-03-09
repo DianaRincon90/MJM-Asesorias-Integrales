@@ -389,75 +389,75 @@ export default function AdminDashboard() {
                                                     </div>
                                                 </div>
                                             )
-                                        })}
                                     </div>
+                                </>
                             )}
 
-                                    {/* CONTACTO TAB */}
-                                    {contentTab === 'contacto' && (
-                                        <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-                                            <h3 style={{ marginBottom: '20px', color: 'var(--mjm-blue)' }}>Información de Contacto</h3>
+                            {/* CONTACTO TAB */}
+                            {contentTab === 'contacto' && (
+                                <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+                                    <h3 style={{ marginBottom: '20px', color: 'var(--mjm-blue)' }}>Información de Contacto</h3>
 
-                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                                                <div>
-                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Correo Principal</label>
-                                                    <input
-                                                        type="text"
-                                                        value={content.contacto_email_1}
-                                                        onChange={(e) => handleTextChange('contacto_email_1', e.target.value)}
-                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Correo Secundario</label>
-                                                    <input
-                                                        type="text"
-                                                        value={content.contacto_email_2}
-                                                        onChange={(e) => handleTextChange('contacto_email_2', e.target.value)}
-                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Teléfono / Celular 1</label>
-                                                    <input
-                                                        type="text"
-                                                        value={content.contacto_phone_1}
-                                                        onChange={(e) => handleTextChange('contacto_phone_1', e.target.value)}
-                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Teléfono / Celular 2</label>
-                                                    <input
-                                                        type="text"
-                                                        value={content.contacto_phone_2}
-                                                        onChange={(e) => handleTextChange('contacto_phone_2', e.target.value)}
-                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                                                    />
-                                                </div>
-                                                <div style={{ gridColumn: '1 / -1' }}>
-                                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Dirección Física</label>
-                                                    <input
-                                                        type="text"
-                                                        value={content.contacto_address}
-                                                        onChange={(e) => handleTextChange('contacto_address', e.target.value)}
-                                                        style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <button
-                                                onClick={() => saveTextContent(['contacto_email_1', 'contacto_email_2', 'contacto_phone_1', 'contacto_phone_2', 'contacto_address'])}
-                                                disabled={saving}
-                                                className="btn-primary"
-                                                style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '30px' }}>
-                                                <Save size={18} /> {saving ? 'Guardando...' : 'Guardar Información de Contacto'}
-                                            </button>
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Correo Principal</label>
+                                            <input
+                                                type="text"
+                                                value={content.contacto_email_1}
+                                                onChange={(e) => handleTextChange('contacto_email_1', e.target.value)}
+                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
+                                            />
                                         </div>
-                                    )}
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Correo Secundario</label>
+                                            <input
+                                                type="text"
+                                                value={content.contacto_email_2}
+                                                onChange={(e) => handleTextChange('contacto_email_2', e.target.value)}
+                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Teléfono / Celular 1</label>
+                                            <input
+                                                type="text"
+                                                value={content.contacto_phone_1}
+                                                onChange={(e) => handleTextChange('contacto_phone_1', e.target.value)}
+                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Teléfono / Celular 2</label>
+                                            <input
+                                                type="text"
+                                                value={content.contacto_phone_2}
+                                                onChange={(e) => handleTextChange('contacto_phone_2', e.target.value)}
+                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
+                                            />
+                                        </div>
+                                        <div style={{ gridColumn: '1 / -1' }}>
+                                            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Dirección Física</label>
+                                            <input
+                                                type="text"
+                                                value={content.contacto_address}
+                                                onChange={(e) => handleTextChange('contacto_address', e.target.value)}
+                                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
+                                            />
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={() => saveTextContent(['contacto_email_1', 'contacto_email_2', 'contacto_phone_1', 'contacto_phone_2', 'contacto_address'])}
+                                        disabled={saving}
+                                        className="btn-primary"
+                                        style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '30px' }}>
+                                        <Save size={18} /> {saving ? 'Guardando...' : 'Guardar Información de Contacto'}
+                                    </button>
                                 </div>
-                        </>
+                            )}
+                        </div>
+                    </>
                 )}
-                    </main>
+            </main>
         </div>
     )
 }
