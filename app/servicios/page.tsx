@@ -105,10 +105,7 @@ export default function ServiciosPage() {
                         subServices: subData
                     }
                 })
-                // Only set if at least one service has a custom title (basic check to see if DB has data)
-                if (data.some(i => i.id.startsWith('servicio_'))) {
-                    setServicesData(dynamicServices)
-                }
+                setServicesData(dynamicServices)
             }
         }
         fetchContent()
