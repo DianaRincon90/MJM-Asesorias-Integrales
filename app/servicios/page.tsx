@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react'
-import { Shield, BookOpen, Settings, Package, ChevronDown, ChevronUp, ClipboardList, Database, CalendarDays, BarChart3, Wrench, GraduationCap, CheckCircle2 } from 'lucide-react'
+import { Shield, BookOpen, Settings, Package, ChevronDown, ChevronUp, ClipboardList, Database, CalendarDays, BarChart3, Wrench, CheckCircle2 } from 'lucide-react'
 import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 
