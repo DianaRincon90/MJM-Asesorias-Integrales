@@ -59,7 +59,7 @@ export default function ServiciosPage() {
                 position: 'relative',
                 backgroundColor: 'var(--mjm-blue)',
                 color: 'white',
-                padding: '100px 20px',
+                padding: '120px 20px',
                 textAlign: 'center',
                 overflow: 'hidden'
             }}>

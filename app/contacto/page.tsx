@@ -33,10 +33,26 @@ export default function ContactoPage() {
     }, [])
     return (
         <div style={{ backgroundColor: '#f8fafc', minHeight: '100vh', paddingBottom: '100px' }}>
-            {/* Header */}
-            <div style={{ backgroundColor: 'var(--mjm-blue)', color: 'white', padding: '80px 20px', textAlign: 'center' }}>
-                <h1 style={{ fontSize: '3rem', fontWeight: 800 }}>Contáctanos</h1>
-                <p style={{ fontSize: '1.1rem', opacity: 0.9, marginTop: '15px' }}>Estamos listos para atender sus requerimientos metrológicos.</p>
+            {/* Header / Banner */}
+            <div style={{
+                position: 'relative',
+                backgroundColor: 'var(--mjm-blue)',
+                color: 'white',
+                padding: '140px 20px',
+                textAlign: 'center',
+                overflow: 'hidden'
+            }}>
+                <Image
+                    src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80"
+                    alt="Banner Contacto"
+                    fill
+                    style={{ objectFit: 'cover', opacity: 0.25 }}
+                    priority
+                />
+                <div style={{ position: 'relative', zIndex: 1 }}>
+                    <h1 style={{ fontSize: '3.5rem', fontWeight: 800 }}>Contáctanos</h1>
+                    <p style={{ fontSize: '1.2rem', opacity: 0.9, marginTop: '20px' }}>Estamos listos para atender sus requerimientos metrológicos.</p>
+                </div>
             </div>
 
             <div className="section-container" style={{ marginTop: '-40px' }}>

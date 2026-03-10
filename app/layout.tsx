@@ -37,7 +37,7 @@ export default function RootLayout({
                         <a href="/login" style={{ color: 'var(--mjm-orange)' }}>Admin</a>
                     </div>
                 </nav>
-                <main style={{ marginTop: '100px' }}>
+                <main style={{ marginTop: '220px' }}>
                     {children}
                 </main>
                 <footer style={{
