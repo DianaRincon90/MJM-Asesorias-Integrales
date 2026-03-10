@@ -255,14 +255,20 @@ export default function ServiciosPage() {
                                                     <div style={{
                                                         width: '70px',
                                                         height: '70px',
-                                                        borderRadius: '50%',
-                                                        backgroundColor: '#fff4eb',
+                                                        borderRadius: item.image ? '16px' : '50%',
+                                                        backgroundColor: item.image ? 'transparent' : '#fff4eb',
                                                         display: 'flex',
                                                         alignItems: 'center',
                                                         justifyContent: 'center',
-                                                        margin: '0 auto 20px auto'
+                                                        margin: '0 auto 20px auto',
+                                                        overflow: 'hidden',
+                                                        position: 'relative'
                                                     }}>
-                                                        {item.icon}
+                                                        {item.image ? (
+                                                            <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }} />
+                                                        ) : (
+                                                            item.icon
+                                                        )}
                                                     </div>
                                                     <h4 style={{ color: 'var(--mjm-blue)', fontSize: '1.1rem', marginBottom: '15px', minHeight: '40px' }}>{item.title}</h4>
                                                     <p style={{ color: '#666', fontSize: '0.9rem', lineHeight: 1.5 }}>{item.desc}</p>

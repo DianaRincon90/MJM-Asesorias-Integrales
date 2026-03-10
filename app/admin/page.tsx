@@ -559,7 +559,7 @@ export default function AdminDashboard() {
                                                                 <h6 style={{ marginBottom: '15px', color: '#555', fontSize: '1.05rem', fontWeight: 600 }}>Cajas Blancas Internas (Sub-Ítems)</h6>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                                                                     {subData.items && subData.items.map((item: any, idx: number) => (
-                                                                        <div key={idx} style={{ display: 'grid', gridTemplateColumns: 'minmax(200px, 1fr) 2fr', gap: '15px', padding: '20px', backgroundColor: 'white', border: '1px solid #e2e8f0', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                                                                        <div key={idx} style={{ display: 'grid', gridTemplateColumns: 'minmax(180px, 1.5fr) 2fr 1fr', gap: '15px', padding: '20px', backgroundColor: 'white', border: '1px solid #e2e8f0', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)', alignItems: 'start' }}>
                                                                             <div>
                                                                                 <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.85rem', fontWeight: 700, color: 'var(--mjm-orange)' }}>Título. Ítem {idx + 1}</label>
                                                                                 <input
@@ -574,9 +574,39 @@ export default function AdminDashboard() {
                                                                                 <textarea
                                                                                     value={item.desc || ''}
                                                                                     onChange={(e) => handleSubServiceChange(num, 'desc', e.target.value, idx)}
-                                                                                    rows={2}
+                                                                                    rows={3}
                                                                                     style={{ width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '0.9rem', resize: 'vertical' }}
                                                                                 />
+                                                                            </div>
+                                                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                                                                <label style={{ display: 'block', marginBottom: '2px', fontSize: '0.85rem', fontWeight: 700, color: 'var(--mjm-orange)' }}>Icono / Foto {idx + 1}</label>
+                                                                                {item.image && (
+                                                                                    <div style={{ width: '50px', height: '50px', borderRadius: '8px', overflow: 'hidden', position: 'relative', border: '1px solid #eee' }}>
+                                                                                        <Image src={item.image} alt="preview" fill style={{ objectFit: 'cover' }} />
+                                                                                    </div>
+                                                                                )}
+                                                                                <input
+                                                                                    type="file"
+                                                                                    accept="image/*"
+                                                                                    id={`upload-icon-${num}-${idx}`}
+                                                                                    style={{ display: 'none' }}
+                                                                                    onChange={async (e) => {
+                                                                                        const file = e.target.files?.[0];
+                                                                                        if (!file) return;
+                                                                                        const fileExt = file.name.split('.').pop();
+                                                                                        const fileName = `icon-${Math.random()}.${fileExt}`;
+                                                                                        const { error: uploadError } = await supabase.storage.from('website-images').upload(fileName, file);
+                                                                                        if (!uploadError) {
+                                                                                            const { data: { publicUrl } } = supabase.storage.from('website-images').getPublicUrl(fileName);
+                                                                                            handleSubServiceChange(num, 'image', publicUrl, idx);
+                                                                                        } else {
+                                                                                            alert("Error subiendo la imagen del icono: " + uploadError.message);
+                                                                                        }
+                                                                                    }}
+                                                                                />
+                                                                                <label htmlFor={`upload-icon-${num}-${idx}`} style={{ display: 'inline-block', padding: '6px 12px', backgroundColor: '#e2e8f0', color: '#333', borderRadius: '6px', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 600, textAlign: 'center', maxWidth: '120px' }}>
+                                                                                    Subir archivo
+                                                                                </label>
                                                                             </div>
                                                                         </div>
                                                                     ))}
