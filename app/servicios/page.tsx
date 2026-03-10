@@ -8,13 +8,14 @@ import { supabase } from '@/lib/supabase'
 export default function ServiciosPage() {
     const [title, setTitle] = useState('Nuestros Servicios')
     const [subtitle, setSubtitle] = useState('Soluciones integrales de aseguramiento metrológico y calidad.')
+    const [bannerImage, setBannerImage] = useState('')
     const [servicesData, setServicesData] = useState<any[]>([])
     const [expandedService, setExpandedService] = useState<number | null>(0)
 
     useEffect(() => {
         const fetchContent = async () => {
             const keys = [
-                'servicios_title', 'servicios_subtitle',
+                'servicios_title', 'servicios_subtitle', 'servicios_image',
                 'servicio_1_title', 'servicio_1_desc', 'servicio_1_image',
                 'servicio_2_title', 'servicio_2_desc', 'servicio_2_image',
                 'servicio_3_title', 'servicio_3_desc', 'servicio_3_image',
@@ -25,8 +26,10 @@ export default function ServiciosPage() {
             if (data) {
                 const titleData = data.find(i => i.id === 'servicios_title')
                 const subtitleData = data.find(i => i.id === 'servicios_subtitle')
+                const bannerData = data.find(i => i.id === 'servicios_image')
                 if (titleData?.value) setTitle(titleData.value)
                 if (subtitleData?.value) setSubtitle(subtitleData.value)
+                if (bannerData?.value) setBannerImage(bannerData.value)
 
                 const defaultTitles = ["Aseguramiento Metrológico", "Capacitación", "Calibración", "Suministros", "Diagnóstico"];
                 const defaultDescs = [
@@ -54,13 +57,20 @@ export default function ServiciosPage() {
         <div className="pb-20">
             {/* Services Header */}
             <div style={{
+                position: 'relative',
                 backgroundColor: 'var(--mjm-blue)',
                 color: 'white',
                 padding: '100px 20px',
-                textAlign: 'center'
+                textAlign: 'center',
+                overflow: 'hidden'
             }}>
-                <h1 style={{ fontSize: '3rem', fontWeight: 800 }}>{title}</h1>
-                <p style={{ fontSize: '1.2rem', opacity: 0.9, marginTop: '20px' }}>{subtitle}</p>
+                {bannerImage && (
+                    <Image src={bannerImage} alt="Banner Servicios" fill style={{ objectFit: 'cover', opacity: 0.3 }} priority />
+                )}
+                <div style={{ position: 'relative', zIndex: 1 }}>
+                    <h1 style={{ fontSize: '3rem', fontWeight: 800 }}>{title}</h1>
+                    <p style={{ fontSize: '1.2rem', opacity: 0.9, marginTop: '20px' }}>{subtitle}</p>
+                </div>
             </div>
 
             {/* Services Section */}
@@ -178,6 +188,13 @@ export default function ServiciosPage() {
                                 {/* Accordion Body */}
                                 {isExpanded && (
                                     <div style={{ padding: '40px', backgroundColor: '#fdfdfd', borderTop: '1px solid #eee' }}>
+                                        {/* Imagen dinámica desde el Panel Administrador */}
+                                        {service.image && service.image !== '' && (
+                                            <div style={{ position: 'relative', width: '100%', height: '350px', marginBottom: '40px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
+                                                <Image src={service.image} alt={service.title} fill style={{ objectFit: 'cover' }} />
+                                            </div>
+                                        )}
+
                                         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
                                             <h3 style={{ fontSize: '1.8rem', color: 'var(--mjm-blue)', marginBottom: '15px' }}>{subServices.title}</h3>
                                             <p style={{ opacity: 0.8, fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>{subServices.desc}</p>

@@ -39,7 +39,8 @@ export default function AdminDashboard() {
         contacto_email_2: '',
         contacto_phone_1: '',
         contacto_phone_2: '',
-        contacto_address: ''
+        contacto_address: '',
+        servicios_image: ''
     })
 
     const [uploading, setUploading] = useState(false)
@@ -59,19 +60,41 @@ export default function AdminDashboard() {
 
     const fetchAllContent = async () => {
         setLoading(true)
-        const { data, error } = await supabase.from('site_settings').select('id, value')
+        try {
+            const { data, error } = await supabase.from('site_settings').select('*')
+            if (error) throw error
+            if (data) {
+                const newContent = { ...content }
+                data.forEach(item => {
+                    if (item.id in newContent) {
+                        newContent[item.id] = item.value
+                    }
+                })
 
-        if (data && !error) {
-            const newContent = { ...content }
-            data.forEach(item => {
-                // @ts-ignore
-                newContent[item.id] = item.value
-            })
-            setContent(newContent)
-        } else {
+                // Mapear textos estáticos al panel si están vacíos en BD
+                const defaultTitles = ["Aseguramiento Metrológico", "Capacitación", "Calibración", "Suministros", "Diagnóstico"];
+                const defaultDescs = [
+                    "Garantizamos la trazabilidad y confiabilidad de sus mediciones según estándares internacionales.",
+                    "Formación especializada en metrología y uso de instrumentación técnica.",
+                    "Verificación y calibración precisa de instrumentos en diversas magnitudes.",
+                    "Equipos y suministros técnicos de alta calidad para sus procesos productivos.",
+                    "Diagnóstico, mantenimiento y verificación técnica integral de estado funcional."
+                ];
+
+                for (let i = 1; i <= 5; i++) {
+                    if (!newContent[`servicio_${i}_title`]) newContent[`servicio_${i}_title`] = defaultTitles[i - 1];
+                    if (!newContent[`servicio_${i}_desc`]) newContent[`servicio_${i}_desc`] = defaultDescs[i - 1];
+                }
+                if (!newContent.servicios_title) newContent.servicios_title = 'Nuestros Servicios';
+                if (!newContent.servicios_subtitle) newContent.servicios_subtitle = 'Soluciones integrales de aseguramiento metrológico y calidad.';
+
+                setContent(newContent)
+            }
+        } catch (error) {
             console.error('Error fetching content:', error)
+        } finally {
+            setLoading(false)
         }
-        setLoading(false)
     }
 
     const handleTextChange = (id: string, value: string) => {
@@ -306,6 +329,38 @@ export default function AdminDashboard() {
                                                     style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '1rem', resize: 'vertical' }}
                                                 />
                                             </div>
+
+                                            <div>
+                                                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#444' }}>Imagen / Foto del Banner Principal</label>
+                                                <div style={{ position: 'relative', height: '150px', width: '100%', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#f0f0f0', border: '1px solid #e2e8f0', marginBottom: '15px' }}>
+                                                    {content.servicios_image ? (
+                                                        <Image src={content.servicios_image} alt="Banner Servicios" fill style={{ objectFit: 'cover' }} />
+                                                    ) : (
+                                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#888', fontSize: '0.9rem' }}>Sin imagen guardada</div>
+                                                    )}
+                                                </div>
+
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={(e) => handleImageUpload(e, 'servicios_image')}
+                                                    style={{ display: 'none' }}
+                                                    id="servicios-banner-upload"
+                                                    disabled={uploading}
+                                                />
+                                                <div style={{ display: 'flex', gap: '10px' }}>
+                                                    <label htmlFor="servicios-banner-upload" style={{
+                                                        display: 'inline-flex', alignItems: 'center', gap: '10px',
+                                                        padding: '10px 20px', backgroundColor: 'var(--mjm-orange)', color: 'white',
+                                                        borderRadius: '8px', cursor: uploading ? 'not-allowed' : 'pointer',
+                                                        fontWeight: 600, transition: 'all 0.3s', fontSize: '0.9rem'
+                                                    }}>
+                                                        <Upload size={16} />
+                                                        {uploading ? 'Subiendo...' : 'Actualizar Imagen del Banner'}
+                                                    </label>
+                                                </div>
+                                            </div>
+
                                             <button
                                                 onClick={() => saveTextContent(['servicios_title', 'servicios_subtitle'])}
                                                 disabled={saving}
