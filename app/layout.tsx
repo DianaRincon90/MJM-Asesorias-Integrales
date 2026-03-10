@@ -28,7 +28,7 @@ export default function RootLayout({
                     zIndex: 1000,
                     boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
                 }}>
-                    <Logo />
+                    <Logo width={180} height={180} />
                     <div style={{ display: 'flex', gap: '30px', fontWeight: 600 }}>
                         <a href="/">Inicio</a>
                         <a href="/servicios">Servicios</a>
@@ -46,7 +46,7 @@ export default function RootLayout({
                     padding: '60px 20px',
                     textAlign: 'center'
                 }}>
-                    <Logo className="footer-logo" />
+                    <Logo className="footer-logo" width={220} height={220} style={{ margin: '0 auto' }} />
                     <p style={{ marginTop: '20px', opacity: 0.8 }}>
                         © {new Date().getFullYear()} Asesorías Integrales MJM S.A.S. Todos los derechos reservados.
                     </p>

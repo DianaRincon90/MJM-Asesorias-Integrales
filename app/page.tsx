@@ -65,31 +65,45 @@ export default function Home() {
             </section>
 
             {/* Quick Overview Section */}
-            <section className="section-container">
+            <section className="section-container" style={{ padding: '80px 20px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+                    <h2 style={{ fontSize: '2.8rem', fontWeight: 800, color: 'var(--mjm-blue)', marginBottom: '20px' }}>
+                        Nuestros Pilares de Excelencia
+                    </h2>
+                    <p style={{ fontSize: '1.2rem', color: '#64748b', maxWidth: '700px', margin: '0 auto' }}>
+                        Basamos nuestras soluciones integrales en tres fundamentos técnicos para garantizar la calidad y precisión industrial.
+                    </p>
+                </div>
+
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
-                    <div style={{ padding: '40px', borderRadius: '24px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                    <div style={{ padding: '40px', borderRadius: '24px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', transition: 'transform 0.3s' }}>
                         <div style={{ width: '60px', height: '60px', backgroundColor: 'var(--mjm-blue)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '25px' }}>
                             <Shield className="text-orange" size={32} />
                         </div>
-                        <h3 style={{ fontSize: '1.8rem', marginBottom: '15px' }}>Confianza Técnica</h3>
-                        <p style={{ opacity: 0.7, lineHeight: 1.6 }}>Garantizamos la precisión en sus procesos a través de un riguroso aseguramiento metrológico y normativo.</p>
-                        <a href="/servicios" style={{ color: 'var(--mjm-orange)', fontWeight: 600, textDecoration: 'none', marginTop: '20px', display: 'inline-block' }}>Ver detalles →</a>
+                        <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', color: 'var(--mjm-blue)' }}>Confianza Técnica</h3>
+                        <p style={{ opacity: 0.7, lineHeight: 1.6, color: '#334155' }}>
+                            Garantizamos la precisión en sus procesos a través de un riguroso aseguramiento metrológico y normativo, avalado por estándares internacionales.
+                        </p>
                     </div>
-                    <div style={{ padding: '40px', borderRadius: '24px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
+
+                    <div style={{ padding: '40px', borderRadius: '24px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', transition: 'transform 0.3s' }}>
                         <div style={{ width: '60px', height: '60px', backgroundColor: 'var(--mjm-blue)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '25px' }}>
                             <BookOpen className="text-orange" size={32} />
                         </div>
-                        <h3 style={{ fontSize: '1.8rem', marginBottom: '15px' }}>Formación Experta</h3>
-                        <p style={{ opacity: 0.7, lineHeight: 1.6 }}>Capacitamos a su personal con metodologías avanzadas y conocimiento práctico de vanguardia.</p>
-                        <a href="/servicios" style={{ color: 'var(--mjm-orange)', fontWeight: 600, textDecoration: 'none', marginTop: '20px', display: 'inline-block' }}>Ver capacitaciones →</a>
+                        <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', color: 'var(--mjm-blue)' }}>Formación Experta</h3>
+                        <p style={{ opacity: 0.7, lineHeight: 1.6, color: '#334155' }}>
+                            Capacitamos a su personal con metodologías avanzadas, talleres prácticos y conocimiento técnico de vanguardia para el sector.
+                        </p>
                     </div>
-                    <div style={{ padding: '40px', borderRadius: '24px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
+
+                    <div style={{ padding: '40px', borderRadius: '24px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', transition: 'transform 0.3s' }}>
                         <div style={{ width: '60px', height: '60px', backgroundColor: 'var(--mjm-blue)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '25px' }}>
                             <Settings className="text-orange" size={32} />
                         </div>
-                        <h3 style={{ fontSize: '1.8rem', marginBottom: '15px' }}>Calibración Precisa</h3>
-                        <p style={{ opacity: 0.7, lineHeight: 1.6 }}>Servicios de calibración de alta exactitud para asegurar la excelencia en sus mediciones industriales.</p>
-                        <a href="/servicios" style={{ color: 'var(--mjm-orange)', fontWeight: 600, textDecoration: 'none', marginTop: '20px', display: 'inline-block' }}>Ver magnitudes →</a>
+                        <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', color: 'var(--mjm-blue)' }}>Calibración Precisa</h3>
+                        <p style={{ opacity: 0.7, lineHeight: 1.6, color: '#334155' }}>
+                            Servicios de calibración de alta exactitud en magnitudes críticas para asegurar la excelencia en sus mediciones industriales.
+                        </p>
                     </div>
                 </div>
             </section>
