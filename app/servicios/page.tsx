@@ -216,41 +216,74 @@ export default function ServiciosPage() {
                 </div>
             </section>
 
-            {/* Allies Section */}
-            <section className="section-container" style={{ backgroundColor: '#f9fafb', borderRadius: '24px', padding: '80px 40px' }}>
-                <h2 style={{ textAlign: 'center', fontSize: '2rem', marginBottom: '40px', opacity: 0.6 }}>Nuestras Marcas Aliadas</h2>
-                <div style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: '40px',
-                    opacity: 1
-                }}>
-                    {[
-                        { name: 'UNI-T', src: '/brands/uni-t.jpg' },
-                        { name: 'Fluke', src: '/brands/fluke.png' },
-                        { name: 'Wilcoxon', src: '/brands/wilcoxon.png' },
-                        { name: 'CTC', src: '/brands/ctc.jpg' },
-                        { name: 'DeltaTrak', src: '/brands/deltatrak.jpg' },
-                        { name: 'SKF', src: '/brands/skf.png' },
-                        { name: 'Easy-Laser', src: '/brands/easylaser.png' }
-                    ].map((brand) => (
-                        <div key={brand.name} style={{
-                            width: '160px',
-                            height: '90px',
-                            position: 'relative',
-                            filter: 'grayscale(100%)',
-                            transition: 'filter 0.3s'
-                        }} onMouseOver={(e) => e.currentTarget.style.filter = 'none'} onMouseOut={(e) => e.currentTarget.style.filter = 'grayscale(100%)'}>
-                            <Image
-                                src={brand.src}
-                                alt={brand.name}
-                                fill
-                                style={{ objectFit: 'contain' }}
-                            />
-                        </div>
-                    ))}
+            {/* Dynamic Brands Carousel Section */}
+            <section style={{
+                backgroundColor: '#f8fafc',
+                padding: '100px 0',
+                overflow: 'hidden',
+                borderTop: '1px solid #e2e8f0',
+                borderBottom: '1px solid #e2e8f0'
+            }}>
+                <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                    <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--mjm-blue)', marginBottom: '15px' }}>
+                        Marcas y Aliados Estratégicos
+                    </h2>
+                    <p style={{ color: '#64748b', fontSize: '1.1rem' }}>Suministros de productos y servicios con los mejores estándares mundiales.</p>
+                </div>
+
+                <div style={{ position: 'relative', width: '100%' }}>
+                    <div className="scroll-container">
+                        {[
+                            // Productos
+                            '/brands/productos/CTC.jpg',
+                            '/brands/productos/DeltaTrak-logo.jpg',
+                            '/brands/productos/Fluke-Logo.png',
+                            '/brands/productos/Logo-trumax.png',
+                            '/brands/productos/Uni-T-logo.jpg',
+                            '/brands/productos/Wilcoxon_Logo-FINAL_RGB-80.png',
+                            '/brands/productos/hioki-logo-1024x275.png',
+                            '/brands/productos/png-clipart-logo-l-s-starrett-company-brand-tool-graphics-hipercard-logo-text-logo.png',
+                            // Servicios
+                            '/brands/servicios/1693432797912-pmaaao.png',
+                            '/brands/servicios/1763365987FAG (1).png',
+                            '/brands/servicios/Adash_www.png',
+                            '/brands/servicios/EASYLASER_600px.png',
+                            '/brands/servicios/FLIR_logo.svg.png',
+                            '/brands/servicios/Fluke_logo.svg.png',
+                            '/brands/servicios/Megger_logo_without_slogan.svg.png',
+                            '/brands/servicios/SKF-Logo.png',
+                            '/brands/servicios/b0a75f_f62ecb4182b64bdbab646485b47f2f5a~mv2.png'
+                        ].concat([
+                            // Duplicate for infinite scroll
+                            '/brands/productos/CTC.jpg',
+                            '/brands/productos/DeltaTrak-logo.jpg',
+                            '/brands/productos/Fluke-Logo.png',
+                            '/brands/productos/Logo-trumax.png',
+                            '/brands/productos/Uni-T-logo.jpg',
+                            '/brands/productos/Wilcoxon_Logo-FINAL_RGB-80.png',
+                            '/brands/productos/hioki-logo-1024x275.png',
+                            '/brands/productos/png-clipart-logo-l-s-starrett-company-brand-tool-graphics-hipercard-logo-text-logo.png',
+                            '/brands/servicios/1693432797912-pmaaao.png',
+                            '/brands/servicios/1763365987FAG (1).png',
+                            '/brands/servicios/Adash_www.png',
+                            '/brands/servicios/EASYLASER_600px.png',
+                            '/brands/servicios/FLIR_logo.svg.png',
+                            '/brands/servicios/Fluke_logo.svg.png',
+                            '/brands/servicios/Megger_logo_without_slogan.svg.png',
+                            '/brands/servicios/SKF-Logo.png',
+                            '/brands/servicios/b0a75f_f62ecb4182b64bdbab646485b47f2f5a~mv2.png'
+                        ]).map((src, idx) => (
+                            <div key={idx} className="brand-card">
+                                <Image
+                                    src={src}
+                                    alt={`Marca aliada ${idx}`}
+                                    width={160}
+                                    height={80}
+                                    style={{ objectFit: 'contain' }}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
         </div>
