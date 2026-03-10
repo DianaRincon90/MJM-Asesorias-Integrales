@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react'
-import { Shield, BookOpen, Settings, Package, ArrowRight } from 'lucide-react'
+import { Shield, BookOpen, Settings, Package, ArrowRight, CheckCircle2 } from 'lucide-react'
 import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 
@@ -108,24 +108,51 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Featured Section */}
-            <section style={{ backgroundColor: 'var(--mjm-blue)', color: 'white', padding: '100px 0' }}>
+            {/* Nuestro Alcance Section */}
+            <section style={{ backgroundColor: 'var(--mjm-orange)', color: 'white', padding: '100px 0' }}>
                 <div className="section-container">
                     <div style={{ display: 'flex', alignItems: 'center', gap: '80px', flexWrap: 'wrap' }}>
-                        <div style={{ flex: '1 1 500px', position: 'relative', height: '500px', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px rgba(0,0,0,0.3)' }}>
+                        <div style={{ flex: '1 1 500px' }}>
+                            <h2 style={{ fontSize: '3.5rem', fontWeight: 800, marginBottom: '20px', display: 'inline-block', borderBottom: '4px solid white', paddingBottom: '10px' }}>
+                                Nuestro Alcance
+                            </h2>
+                            <p style={{ fontSize: '1.2rem', lineHeight: 1.6, marginBottom: '40px', opacity: 0.95, fontWeight: 500 }}>
+                                Ofrecemos soluciones integrales certificadas bajo la norma ISO 9001, garantizando la máxima calidad y precisión en cada proceso.
+                            </p>
+
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                                {[
+                                    "Asesoría, consultoría, implementación y evaluación de planes de aseguramiento metrológico",
+                                    "Capacitación especializada en metrología",
+                                    "Diagnóstico, mantenimiento y verificación de instrumentos",
+                                    "Calibración y distribución de instrumentos de medición"
+                                ].map((item, idx) => (
+                                    <li key={idx} style={{ display: 'flex', alignItems: 'start', gap: '15px', fontSize: '1.1rem', fontWeight: 600 }}>
+                                        <div style={{
+                                            backgroundColor: 'white',
+                                            borderRadius: '50%',
+                                            width: '28px',
+                                            height: '28px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            flexShrink: 0,
+                                            marginTop: '2px'
+                                        }}>
+                                            <CheckCircle2 size={18} style={{ color: 'var(--mjm-orange)' }} />
+                                        </div>
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div style={{ flex: '1 1 400px', position: 'relative', height: '550px', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px rgba(0,0,0,0.2)' }}>
                             <Image
                                 src={teamImage}
-                                alt="MJM en CIMGA"
+                                alt="Equipo MJM"
                                 fill
                                 style={{ objectFit: 'cover', objectPosition: 'center top' }}
                             />
-                        </div>
-                        <div style={{ flex: '1 1 400px' }}>
-                            <h2 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '30px', color: 'var(--mjm-orange)' }}>Más que asesorías, somos su socio en calidad</h2>
-                            <p style={{ fontSize: '1.2rem', lineHeight: 1.8, marginBottom: '40px', opacity: 0.9 }}>
-                                Descubra nuestra filosofía empresarial y el equipo de expertos que respalda cada uno de nuestros procesos técnicos.
-                            </p>
-                            <a href="/nosotros" className="btn-primary" style={{ textDecoration: 'none' }}>Conocer Nuestra Historia</a>
                         </div>
                     </div>
                 </div>
