@@ -31,78 +31,20 @@ export default function ServiciosPage() {
                 if (subtitleData?.value) setSubtitle(subtitleData.value)
                 if (bannerData?.value) setBannerImage(bannerData.value)
 
-                const defaultTitles = ["Aseguramiento Metrológico", "Capacitación", "Calibración", "Suministros", "Diagnóstico"];
-                const defaultDescs = [
-                    "Garantizamos la trazabilidad y confiabilidad de sus mediciones según estándares internacionales.",
-                    "Formación especializada en metrología y uso de instrumentación técnica.",
-                    "Verificación y calibración precisa de instrumentos en diversas magnitudes.",
-                    "Equipos y suministros técnicos de alta calidad para sus procesos productivos.",
-                    "Diagnóstico, mantenimiento y verificación técnica integral de estado funcional."
-                ];
-
-                const defaultSubServices = [
-                    {
-                        title: "Planes y Programas de Aseguramiento y Control",
-                        desc: "Gestionamos integralmente sus procesos de medición para garantizar la conformidad y la calidad de sus productos y servicios",
-                        items: [
-                            { title: "Clasificación de Equipos", desc: "Identificación y clasificación detallada de todos los instrumentos de medición para un control efectivo" },
-                            { title: "Levantamiento de Información", desc: "Recopilación exhaustiva de datos técnicos y metrológicos para establecer la línea base del aseguramiento" },
-                            { title: "Cronogramas Integrados", desc: "Planificación estratégica de rutinas para minimizar tiempos de inactividad" },
-                            { title: "Indicadores de Gestión", desc: "Visualización de datos y métricas clave para la toma de decisiones basada en evidencia" }
-                        ]
-                    },
-                    {
-                        title: "Eventos y Capacitaciones",
-                        desc: "Generamos espacios para nuestros clientes y aliados, con el fin de promover la cultura metrológica, fortalecer conceptos y apoyar la aclaración de inquietudes.",
-                        items: [
-                            { title: "Conceptos Básicos", desc: "Formación en conceptos fundamentales de metrología aplicable a su industria." },
-                            { title: "Uso de Instrumentos", desc: "Capacitación práctica en el uso y manipulación adecuada de instrumentos de medición." },
-                            { title: "Interpretación", desc: "Guía experta para la correcta lectura e interpretación de certificados de calibración." }
-                        ]
-                    },
-                    {
-                        title: "Servicios de Calibración, Verificación y Mantenimiento",
-                        desc: "Fortalecemos la confianza metrológica en la toma de mediciones a través de servicios de calidad, responsabilidad y compromiso.",
-                        items: [
-                            { title: "Calibración Trazable", desc: "Servicios de calibración con patrones directamente trazables a estándares nacionales o internacionales." },
-                            { title: "Laboratorios Acreditados", desc: "Operaciones locales y convenios con aliados bajo el cumplimiento de lineamientos ISO/IEC 17025." },
-                            { title: "Verificación y Ajuste", desc: "Comprobación del estado en el que se encuentra su instrumento respecto al error máximo permitido." }
-                        ]
-                    },
-                    {
-                        title: "Suministros e Instrumentación",
-                        desc: "Suministramos productos orientados a optimizar la medición y análisis de variables operacionales.",
-                        items: [
-                            { title: "Equipos y Repuestos", desc: "Amplio catálogo en instrumentos de medición industrial y repuestos garantizados." },
-                            { title: "Accesorios y Estuches", desc: "Suministro de elementos para la conservación y transporte seguro de los equipos." },
-                            { title: "Complementos Óptimos", desc: "Todo lo necesario para asegurar el óptimo funcionamiento continuo de la instrumentación." }
-                        ]
-                    },
-                    {
-                        title: "Diagnóstico Integral y Verificación",
-                        desc: "Estamos comprometidos con la generación de valor para nuestros clientes a través de diagnósticos rigurosos.",
-                        items: [
-                            { title: "Diagnóstico Técnico", desc: "Evaluación minuciosa e integral del estado funcional y metrológico de la base instalada." },
-                            { title: "Mantenimiento Preventivo", desc: "Intervenciones proactivas para prolongar la vida útil de los equipos de medición." },
-                            { title: "Reporte de Desempeño", desc: "Entrega de informes consolidados de verificación técnica para toma de decisiones." }
-                        ]
-                    }
-                ];
-
-                const dynamicServices = [1, 2, 3, 4, 5].map((num, idx) => {
-                    let subData = defaultSubServices[idx];
+                const dynamicServices = [1, 2, 3, 4, 5].map((num) => {
                     const dbSub = data.find(i => i.id === `servicio_${num}_subservices`);
+                    let subServices = { title: '', desc: '', items: [] };
                     if (dbSub?.value) {
                         try {
-                            subData = JSON.parse(dbSub.value);
+                            subServices = JSON.parse(dbSub.value);
                         } catch (e) { }
                     }
 
                     return {
-                        title: data.find(i => i.id === `servicio_${num}_title`)?.value || defaultTitles[num - 1],
-                        desc: data.find(i => i.id === `servicio_${num}_desc`)?.value || defaultDescs[num - 1],
-                        image: data.find(i => i.id === `servicio_${num}_image`)?.value || (num === 1 ? '/services/aseguramiento.png' : '/about/mission.png'),
-                        subServices: subData
+                        title: data.find(i => i.id === `servicio_${num}_title`)?.value || `Servicio ${num}`,
+                        desc: data.find(i => i.id === `servicio_${num}_desc`)?.value || '',
+                        image: data.find(i => i.id === `servicio_${num}_image`)?.value || '',
+                        subServices
                     }
                 })
                 setServicesData(dynamicServices)
@@ -140,13 +82,7 @@ export default function ServiciosPage() {
                     maxWidth: '1000px',
                     margin: '40px auto 0 auto'
                 }}>
-                    {(servicesData.length > 0 ? servicesData : [
-                        { title: "Aseguramiento Metrológico", desc: "Garantizamos la trazabilidad y confiabilidad de sus mediciones según estándares internacionales.", image: "/services/aseguramiento.png" },
-                        { title: "Capacitación", desc: "Formación especializada en metrología y uso de instrumentación técnica.", image: "/about/mission.png" },
-                        { title: "Calibración", desc: "Verificación y calibración precisa de instrumentos en diversas magnitudes.", image: "/about/mission.png" },
-                        { title: "Suministros", desc: "Equipos y suministros técnicos de alta calidad para sus procesos industriales.", image: "/about/mission.png" },
-                        { title: "Diagnóstico", desc: "Diagnóstico, mantenimiento y verificación técnica integral.", image: "/about/mission.png" }
-                    ]).map((service, i) => {
+                    {servicesData.map((service, i) => {
                         const isExpanded = expandedService === i;
                         const subServices = service.subServices || { title: '', desc: '', items: [] };
 
